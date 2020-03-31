@@ -1,0 +1,56 @@
+{
+  "tabs":{
+    "home":[
+      {
+        "name": "New",
+        "content": "This is where new stuff is"
+      },
+      {
+        "name": "Work",
+        "content": "Here there are work requests"
+      },
+      {
+        "name": "All",
+        "content": "This is where everything is"
+      }
+    ],
+    "dashboard":[
+      {
+        "name": "All",
+        "content": "All work requests"
+      },
+      {
+        "name": "Projects",
+        "content": "Here are the projects"
+      },
+      {
+        "name": "+",
+        "content": "Create a new post or project"
+      }
+    ],
+    "chat":[
+      {
+        "name": "Billy",
+        "content": "message joe"
+      },
+      {
+        "name": "Bob",
+        "content": "now you want to message bob"
+      },
+      {
+        "name": "Joe",
+        "content": "this is joe you want to message"
+      }
+    ],
+    "tracking":[
+      {
+        "name": "Stopwatch",
+        "content": "All work requests"
+      },
+      {
+        "name": "Chart",
+        "content": "Here are the projects"
+      }
+    ]
+  }
+}
