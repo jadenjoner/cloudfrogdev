@@ -10,8 +10,5 @@
     "db.js": "^0.15.0",
     "express": "^4.17.1",
     "socket.io": "^2.3.0"
-  },
-  "scripts": {
-    "start": "node index.js >> logs.txt"
   }
 }
