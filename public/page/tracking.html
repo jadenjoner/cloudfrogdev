@@ -1,0 +1,346 @@
+<div class="tab">
+	<div id="tab-button0" class="tablink" onclick="tab('0');socket.emit('client data')">Stopwatch</div>
+	<div id="tab-button1" class="tablink" onclick="tab('1');socket.emit('client data');$('chart-table').innerHTML = ''">Chart</div>
+	<div id="tab-button2" class="tablink" onclick="tab('2');socket.emit('client data')">Clients</div>
+</div>
+
+<div class="tab-content tab-content1" style="display: block;">
+
+	<h2 class="tabtitle">Stop Watch</h2>
+
+	<div id="stopwatch-outer">
+		<div>
+			<p id="stopwatch-time">0:0</p>
+		</div>
+	</div>
+
+	<div id="stopwatch-buttons">
+		<div>
+			<div id="stopwatch-start" onclick="stopwatchStart();">Start</div>
+			<div id="stopwatch-reset" onclick="stopwatchReset();">Reset</div>
+		</div>
+	</div>
+
+	<div class="input-outer" id="stopwatch-input">
+		<select class="input-select" id="stopwatch-client">
+      <option value="" disabled="disabled" selected="selected">Client</option>
+    </select>
+    <input class="input-text" id="stopwatch-minutes" type="text" placeholder="min" style="width: 50px">
+    <input class="input-text" id="stopwatch-type" type="text" placeholder="work type">
+    <input class="input-text" id="stopwatch-notes" type="text" placeholder="notes">
+    <input class="input-button" onclick="addTime()" type="button" id="stopwatch-submit" value="submit">
+  </div>
+
+</div>
+<div class="tab-content tab-content2">
+  <h2 class="tabtitle">Tracking Chart</h2>
+
+  <div class="input-outer">
+    <select class="input-select" id="chart-client" onchange="chartChange(1)">
+      <option value="" disabled="disabled" selected="selected">Client</option>
+    </select>
+    <select class="input-select" id="chart-user" style="display: none" onchange="chartChange(0)">
+      <option value="" disabled="disabled" selected="selected">User</option>
+    </select>
+  </div>
+
+  <table id="chart-table"></table>
+
+</div>
+<div class="tab-content tab-content3">
+  <h2 class="tabtitle">Clients</h2>
+  <div id="client-outer"></div>
+
+  <div class="input-outer" id="client-input">
+    <input class="input-text" id="client-input-name" type="text" placeholder="client">
+    <input class="input-button" type="button" id="client-submit" onclick="addClient()" value="add">
+  </div>
+</div>
+
+
+<div id="share-popup">
+  <h3>Share Client</h3>
+  <div id="share-popup-outer"></div>
+  <div class="input-outer" style="border-radius: 0">
+    <input placeholder="Username" class="input-text" id="share-client-input"></input>
+    <input onclick="submitShare()" class="input-button" type="button" value="Share">
+  </div>
+    <div id="share-popup-close" onclick="closePopup('share-popup')">close</div>
+</div>
+
+<style>
+
+
+/* StopWatch */
+
+.tabtitle{
+  font-size: 40px;
+  padding: 20px;
+  text-align: center;
+}
+
+
+#stopwatch-outer {
+    text-align: center;
+}
+
+#stopwatch-outer > div {
+    background: #222;
+    padding: 7px 18px;
+    color: #eee;
+    font-size: 80px;
+    border-radius: 20px;
+    margin: 0 auto;
+    display: inline-block;
+    overflow: hidden;
+}
+
+#stopwatch-buttons{
+  text-align: center;
+}
+#stopwatch-buttons > div{
+  background: #222;
+  padding: 10px;
+  color: #eee;
+  font-size: 20px;
+  border-radius: 20px;
+  margin: 0 auto;
+  display: inline-block;
+  overflow: hidden;
+}
+#stopwatch-buttons > div > div{
+  display: inline-block;
+  border-radius: 999vh;
+  padding: 7px;
+  margin: 3px;
+  font-size: 25px;
+  transition: opacity 0.2s;
+}
+#stopwatch-buttons > div > div:hover{
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+
+#stopwatch-start{
+  background: green;
+}
+#stopwatch-reset{
+  background: #d62;
+}
+
+#stopwatch-input{
+  background: #222;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#stopwatch-input input[type="text"], #stopwatch-input select{
+  border: 3px solid #555;
+  border-radius: 999vh;
+  padding: 5px 7px;
+  font-size: 20px;
+  width: 160px;
+}
+
+#stopwatch-input select{
+  width: 160px !important;
+}
+
+#stopwatch-input input[type="text"]:focus, #stopwatch-input select:focus{
+  border-color: rgb(100, 110, 220);
+}
+
+#stopwatch-input input[type="button"], #stopwatch-input select{
+  border: 3px solid #555;
+  border-radius: 999vh;
+  padding: 5px 7px;
+  font-size: 20px;
+  width: 100px;
+  transition: 0.2s;
+}
+
+#stopwatch-input input[type="button"]:active, #stopwatch-input select:active{
+  border-color: rgb(100, 110, 220);
+}
+#stopwatch-input input[type="button"]:hover{
+  cursor: pointer;
+  background: #ccc;
+}
+
+/* Chart */
+
+#chart-table{
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow:hidden;
+  border-radius: 10px;
+}
+
+
+
+#chart-table, #chart-table th, #chart-table td{
+  transition: 0.3s;
+}
+
+#chart-table th{
+  padding: 5px;
+  text-align: center;
+  background: inherit;
+  color: #eee;
+  border-radius: 4px;
+}
+#chart-table td{
+  padding: 2px;
+  text-align: left;
+  background: inherit;
+  border-radius: 4px;
+}
+#chart-table tr:first-child{
+  background: #222 !important;
+}
+
+ #chart-table tr:hover {background-color: #ddd;} 
+
+
+/* Clients */
+
+#client-outer{
+  background: #ddd;
+  margin: 20px auto;
+  width: 900px;
+  max-width: 100%;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.client-box{
+  width: 96%;
+  background: #eee;
+  text-align: left;
+  border-radius: 5px;
+  margin: 10px auto;
+}
+.client-box div{
+  display: inline-block;
+  font-size: 24px;
+  padding: 6px;
+  font-weight: 500;
+  max-width: 40%;
+  border-radius: 5px;
+}
+.client-box div:hover{
+  cursor: pointer;
+  border: 2px solid;
+  border-color: #222;
+  margin: -2px;
+}
+.client-name{
+  background: #222;
+  color: #eee;
+}
+.client-share{
+  float: right;
+  background: #1e3e94ff;
+  color: white;
+}
+
+
+
+/* Popup */
+
+#share-popup{
+  width: 500px;
+  border-radius: 20px;
+  background: white;
+  z-index: 1010;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  text-align: center;
+}
+#share-popup h3{
+  padding: 20px;
+  font-size: 40px;
+}
+#share-popup-outer{
+  width: 93%;
+  background: #ddd;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 10px;
+  
+}
+
+.share-popup-item{
+  background: #222;
+  text-align: left;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.share-popup-name{
+  color: #eee;
+  display: inline-block;
+  text-align: left;
+  font-weight: 500;
+}
+.share-popup-admin{
+  color: #bbb;
+  display: inline-block;
+  text-align: right;
+  float:right;
+  background: #444;
+  font-weight: 500;
+  margin: -5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.share-popup-remove{
+  color: #eee;
+  display: inline-block;
+  text-align: right;
+  float:right;
+  background: #f62;
+  font-weight: 500;
+  margin: -5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+#share-popup-close{
+  color: #eee;
+  display: inline-block;
+  text-align: right;
+  background: #1e3e94ff;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 999vh;
+  margin: 20px auto;
+  transition: background: 0.2s;
+}
+#share-popup-close:hover{
+  cursor: pointer;
+  background: #183083ff;
+}
+.share-popup-admin:hover{
+  cursor: pointer;
+  border: 2px solid black;
+  margin: -7px;
+  
+}
+.share-popup-remove:hover{
+  cursor: pointer;
+  margin: -7px;
+  margin-left: 18px;
+  border: 2px solid black;
+}
+
+
+</style>
