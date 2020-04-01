@@ -34,7 +34,10 @@ function closePopup(id){
 
 
 function login(type=1){
-  if(type == 2){
+  if(location.protocol != 'https:')
+		message("Unsecure connection! use https")
+
+  if(type == 2 && location.protocol == 'https:'){
     socket.emit("login", {
       username: "",
       password: getCookie("login"),

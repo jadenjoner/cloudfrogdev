@@ -6,6 +6,10 @@ socket.on('connected', ()=>{
 })
 
 socket.on('message', (msg)=>{
+  message(msg);
+})
+
+function message(msg){
   var timeout1;
   var timeout2;
   
@@ -22,5 +26,5 @@ socket.on('message', (msg)=>{
     timeout2 = setTimeout(()=>{
       $('message').style.display = "none"
     }, 1000)
-  }, 3000)
-})
+  }, 5000)
+}
