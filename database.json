@@ -6,8 +6,8 @@
       "cookie": 0.9679531454554402,
       "stopwatch": {
         "running": true,
-        "startTime": 1585423425147,
-        "buffer": 1585693100720
+        "startTime": 1585699818248,
+        "buffer": 1585700471527
       }
     }
   ],
@@ -122,13 +122,32 @@
     {
       "name": "tester",
       "owner": "admin",
-      "users": [
-        {
-          "name": "admin",
-          "admin": true,
-          "chart": []
-        }
-      ]
+      "users": []
+    },
+    {
+      "name": "tester3",
+      "owner": "admin",
+      "users": []
+    },
+    {
+      "name": "newtest",
+      "owner": "admin",
+      "users": []
+    },
+    {
+      "name": "testtt",
+      "owner": "admin",
+      "users": []
+    },
+    {
+      "name": "testtt1",
+      "owner": "admin",
+      "users": []
+    },
+    {
+      "name": "tester123",
+      "owner": "admin",
+      "users": []
     }
   ]
 }

@@ -1,41 +1,65 @@
+// Libraries
 var express = require('express');
 var app = express();
 var http = require('http');
 var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 var database = require('./db.js');
 
-var db1 = new database('database.json')
+// Initalize
+var db1 = new database('database.json') // Create Database
 var dbv = db1.data;
-var staticData = new database('static.json')
-var stat = staticData.data
-
-var io = require('socket.io').listen(server);
-
-var clients = [];
 
 server.listen(process.env.PORT);
 
+var clients = []; // Create list of connected clients
 
 app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.sendFile('public/index.html');
 });
 
+
+// Console log colors
+
+Reset = "\x1b[0m"
+Bright = "\x1b[1m"
+Dim = "\x1b[2m"
+Blink = "\x1b[5m"
+
+FgBlack = "\x1b[30m"
+FgRed = "\x1b[31m"
+FgGreen = "\x1b[32m"
+FgYellow = "\x1b[33m"
+FgBlue = "\x1b[34m"
+FgWhite = "\x1b[37m"
+FgCyan = "\x1b[36m"
+
+BgBlack = "\x1b[40m"
+BgRed = "\x1b[41m"
+BgGreen = "\x1b[42m"
+BgYellow = "\x1b[43m"
+BgBlue = "\x1b[44m"
+BgWhite = "\x1b[47m"
+
+console.log(BgGreen + " Server Started " + Reset)
+
+// Socket Connection
 io.on('connection', function (socket) {
 
   var username = false
 
-  console.log("new connection: " + socket.id)
+  console.log(FgGreen + "new connection: " + FgCyan + socket.id + Reset)
   socket.emit('connected')
 
   clients[socket.id] = {
-    username: "",
+    username: false,
   }
   var client = clients[socket.id];
 
   socket.on('disconnect', () => {
     clients.splice(socket.id, 1);
-    console.log("client disconnected " + socket.id)
+    console.log(FgYellow + "client disconnect: " + FgCyan + socket.id + Reset)
   })
 
 
@@ -44,12 +68,12 @@ io.on('connection', function (socket) {
   ///////////
 
   socket.on('login', (request) => {
-    if (request.type == 1) {
+    if (request.type == 1) { // User tried to log in with popup
       var error = true;
       for (var i in dbv.users) {
         if (dbv.users[i].username == request.username) {
           if (dbv.users[i].password == request.password) {
-            console.log(request.username + " has logged in of " + socket.id)
+            console.log(FgGreen + "new login: " + FgCyan + request.username + " : " + socket.id + Reset)
             error = false;
 
             socket.emit('login', {
@@ -72,7 +96,7 @@ io.on('connection', function (socket) {
         })
       }
     }
-    else if (request.type == 0) {
+    else if (request.type == 0) { // User tried to register with popup
       var uniq = true;
       for (var i in dbv.users) {
         if (dbv.users[i].username == request.username) {
@@ -91,7 +115,7 @@ io.on('connection', function (socket) {
 
             db1.write();
 
-            console.log(request.username + " Registered")
+            console.log(FgGreen + "new register: " + FgCyan + request.username + " : " + socket.id + Reset)
             socket.emit('login', {
               action: 0,
               message: "Registerd; you can now login",
@@ -123,10 +147,9 @@ io.on('connection', function (socket) {
         })
       }
     }
-    else if (request.type == 2) {
+    else if (request.type == 2) { // User auto cookie login
       for (var i in dbv.users) {
         if (dbv.users[i].cookie == request.password) {
-          console.log(request.username + " has logged in of " + socket.id)
           error = false;
 
           socket.emit('login', {
@@ -138,6 +161,8 @@ io.on('connection', function (socket) {
 
           client.username = dbv.users[i].username;
           username = clients[socket.id].username
+
+          console.log(FgGreen + "new login (cookie): " + FgCyan + username + " : " + socket.id + Reset)
           break;
         }
       }
@@ -161,7 +186,7 @@ io.on('connection', function (socket) {
           return
         }
       }
-      console.log("New client added "+name);
+      console.log(FgGreen + "new client: " + FgCyan + name + " : " + username)
       dbv.clients.push({
         name: name,
         owner: username,
@@ -176,23 +201,19 @@ io.on('connection', function (socket) {
       db1.write();
       sendClientData(socket, username);
     }
-    else console.log("user tried to add client when not logged in")
+    else message("an error occured. Please reload page", socket)
   })
 
   socket.on('client data', (msg)=>{
-    console.log("Got client data request")
-    
     sendClientData(socket, username)
   })
 
   socket.on('add time', (msg)=>{
-    console.log("recived time request");
     if(username){
       for(var i in dbv.clients){
         if(dbv.clients[i].name == msg.client)for(var b in dbv.clients[i].users){
           if(dbv.clients[i].users[b].name == username){
             dbv.clients[i].users[b].chart.push(msg)
-            console.log(dbv.clients[i].users[b].chart)
             db1.write();
             message("time added", socket)
             break;
@@ -203,7 +224,7 @@ io.on('connection', function (socket) {
   })
 
   socket.on('leave client', (client)=>{
-    console.log(username + " Left " + client)
+    console.log(FgYellow + "user update: " + FgCyan +  username + Reset + " left client " + FgCyan + client + Reset)
 
     for(var i in dbv.clients){
       var name1 = dbv.clients[i].name
@@ -239,11 +260,11 @@ io.on('connection', function (socket) {
                   db1.write();
                   sendClientData(socket, username)
                   socket.emit('share popup', dbv.clients[i].name)
-                  console.log("Client share removed")
+    		  console.log(FgYellow + "user update: " + FgCyan +  username + Reset + " share removed of client " + FgCyan + msg.client + Reset)
                 }
               }
             }
-            else message("You are not admin", socket)
+            else message("It seems that you are not admin", socket)
           }
         }
       }
@@ -276,7 +297,7 @@ io.on('connection', function (socket) {
     }
   })
 
-  // Add share
+  // Add client share
 
   socket.on('add share', (msg)=>{
     for(var i in dbv.clients){
@@ -358,7 +379,6 @@ function sendClientData(socket, username){
           break
         }
       }
-      console.log(admin)
       
       if(admin){
           for(var b in dbv.clients[i].users){
@@ -426,7 +446,3 @@ function scorePassword(pass) {
 
     return parseInt(score);
 }
-
-console.log("Server Started")
-
-console.log(stat.tabs.dashboard);
