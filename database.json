@@ -5,9 +5,9 @@
       "password": "password",
       "cookie": 0.9679531454554402,
       "stopwatch": {
-        "running": true,
-        "startTime": 1585948312444,
-        "buffer": 1585948283891
+        "running": false,
+        "startTime": 1585948356480,
+        "buffer": 1585949129384
       }
     }
   ],

@@ -43,7 +43,7 @@ function stopwatchStart(){
       minutesWas = minutes
 
       
-    },1000);
+    },100);
 
     socket.emit('stopwatch', {
       running: true,
@@ -111,7 +111,7 @@ socket.on("stopwatch", (msg)=>{
       minutesWas = minutes
 
       
-    },1000);
+    },100);
   }
 })
 
