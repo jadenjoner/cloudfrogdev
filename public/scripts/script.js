@@ -61,12 +61,20 @@ function toggleAccount(){
     $('notify-box').style.display = "none"
     $('account-img').style.background = "#65b"
     $('notify-img').style.background = "#ffffff00"
+    
+    socket.emit("account data") // Ask for accound data from server
   }
   else{
     $('account-box').style.display = "none"
     $('account-img').style.background = ""
   }
 }
+
+socket.on("account data", (msg) => {
+  console.log("Got accout data: " + msg.username);
+  document.getElementById("account-username").innerHTML = "Hello, " + msg.username;
+
+})
 
 
 document.addEventListener('touchmove', function (event) {
@@ -81,3 +89,16 @@ document.addEventListener('touchend', function (event) {
   }
   lastTouchEnd = now;
 }, false);
+
+
+
+
+
+
+
+
+
+function logout(){
+  setCookie("login", "")
+  window.location.reload(false);
+}

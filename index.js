@@ -364,6 +364,23 @@ io.on('connection', function (socket) {
     }
   })
 
+
+  
+  // Account Requests
+  
+
+  socket.on("account data", () => {
+    if(username){
+      socket.emit("account data", {
+        username: username
+      })
+    }
+    else
+      loginPopup(socket);
+  })
+
+
+
 })
 
 

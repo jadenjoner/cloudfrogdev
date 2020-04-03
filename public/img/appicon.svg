@@ -12,8 +12,11 @@
    viewBox="0 0 24 24"
    version="1.1"
    id="svg6"
-   sodipodi:docname="dashboard (copy).svg"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+   sodipodi:docname="appicon.svg"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"
+   inkscape:export-filename="/home/jaden/Projects/cloudfrogdev/public/img/appicon.png"
+   inkscape:export-xdpi="496"
+   inkscape:export-ydpi="496">
   <metadata
      id="metadata12">
     <rdf:RDF>
@@ -36,15 +39,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2560"
-     inkscape:window-height="1378"
+     inkscape:window-width="1680"
+     inkscape:window-height="1022"
      id="namedview8"
      showgrid="false"
-     inkscape:zoom="27.812867"
-     inkscape:cx="2.7059539"
-     inkscape:cy="14.263978"
-     inkscape:window-x="0"
-     inkscape:window-y="34"
+     inkscape:zoom="19.666667"
+     inkscape:cx="6.0735573"
+     inkscape:cy="10.923836"
+     inkscape:window-x="2560"
+     inkscape:window-y="289"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg6" />
   <rect
@@ -59,7 +62,8 @@
      d="M0 0h24v24H0V0z"
      id="path2" />
   <path
-     d="M4 13h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1zm0 8h6c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1zm10 0h6c.55 0 1-.45 1-1v-8c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1zM13 4v4c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1z"
+     d="m 4.4519774,12.943503 h 5.6610166 c 0.518927,0 0.943503,-0.424576 0.943503,-0.943503 V 4.4519774 c 0,-0.5189266 -0.424576,-0.9435028 -0.943503,-0.9435028 H 4.4519774 c -0.5189266,0 -0.9435028,0.4245762 -0.9435028,0.9435028 V 12 c 0,0.518927 0.4245762,0.943503 0.9435028,0.943503 z m 0,7.548022 h 5.6610166 c 0.518927,0 0.943503,-0.424576 0.943503,-0.943502 v -3.774012 c 0,-0.518926 -0.424576,-0.943503 -0.943503,-0.943503 H 4.4519774 c -0.5189266,0 -0.9435028,0.424577 -0.9435028,0.943503 v 3.774012 c 0,0.518926 0.4245762,0.943502 0.9435028,0.943502 z m 9.4350286,0 h 5.661017 c 0.518926,0 0.943502,-0.424576 0.943502,-0.943502 V 12 c 0,-0.518927 -0.424576,-0.943503 -0.943502,-0.943503 h -5.661017 c -0.518927,0 -0.943503,0.424576 -0.943503,0.943503 v 7.548023 c 0,0.518926 0.424576,0.943502 0.943503,0.943502 z M 12.943503,4.4519774 v 3.7740113 c 0,0.5189266 0.424576,0.9435028 0.943503,0.9435028 h 5.661017 c 0.518926,0 0.943502,-0.4245762 0.943502,-0.9435028 V 4.4519774 c 0,-0.5189266 -0.424576,-0.9435028 -0.943502,-0.9435028 h -5.661017 c -0.518927,0 -0.943503,0.4245762 -0.943503,0.9435028 z"
      id="path4"
-     style="fill:#ffffff;fill-opacity:1" />
+     style="fill:#ffffff;fill-opacity:1;stroke-width:0.94350284"
+     inkscape:connector-curvature="0" />
 </svg>

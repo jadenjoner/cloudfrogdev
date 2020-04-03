@@ -6,8 +6,8 @@
       "cookie": 0.9679531454554402,
       "stopwatch": {
         "running": false,
-        "startTime": 1585948356480,
-        "buffer": 1585949129384
+        "startTime": 1585951452768,
+        "buffer": 1585954025586
       }
     }
   ],
@@ -157,15 +157,7 @@
     {
       "name": "waefwe43",
       "owner": "admin",
-      "users": [
-        {
-          "name": "admin",
-          "admin": true,
-          "chart": [],
-          "client": "waefwe43",
-          "self": true
-        }
-      ]
+      "users": []
     }
   ]
 }
