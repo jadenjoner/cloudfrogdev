@@ -1,4 +1,8 @@
-// Stop watch
+
+////////////////
+// Stop watch //
+////////////////
+
 
 var stopwatchRunning = false;
 var timing;
@@ -29,6 +33,7 @@ function stopwatchStart(){
 
     if(timeBuffer == 0)startTime = Date.now();
     else startTime += Date.now()-timeBuffer;
+    clearTimeout(timing);
     timing = setInterval(() => {
       minutes = Math.floor((Date.now()-startTime) / 60000)
       stopwatch.innerHTML = minutes + ":" + Math.floor((Date.now()-startTime) % 60000 / 1000);
@@ -67,7 +72,7 @@ function stopwatchReset(){
   socket.emit('stopwatch', {
     running: false,
     startTime: startTime,
-    timeBuffer: timeBuffer
+    timeBuffer: startTime 
   })
 }
 
@@ -77,24 +82,36 @@ socket.on("stopwatch", (msg)=>{
   stopwatchRunning = msg.running
   startTime = msg.startTime
   timeBuffer = msg.buffer
+  console.log("set statis to " + stopwatchRunning)
 
-  if(msg.running){
-    minutes = Math.floor((Date.now()-startTime) / 60000)
-    $('stopwatch-time').innerHTML = minutes + ":" + Math.floor((Date.now()-startTime) % 60000 / 1000);
-    $('title')[0].innerHTML = $('stopwatch-time').innerHTML
+  var stopwatch = document.getElementById('stopwatch-time'); 
+  var stopwatchStart = document.getElementById('stopwatch-start');
 
-    $('stopwatch-minutes').value = minutes
-    minutesWas = minutes
+  if(!stopwatchRunning){
+    stopwatchStart.innerHTML = "Start"
+    stopwatchStart.style.background = "green";
+    clearTimeout(timing);
+    $('title')[0].innerHTML = "Cloud Frog Dev"
 
-    stopwatchRunning = true
-    stopwatchStart();
-    stopwatchStart();
+    var seconds = Math.floor((timeBuffer-startTime) % 60000 / 1000)
+    var minutes = Math.floor((timeBuffer-startTime) / 60000)
+    stopwatch.innerHTML = minutes + ":" + seconds 
   }
   else{
-    var startTimeB = startTime + (Date.now() - timeBuffer)
-    minutes = Math.floor((Date.now()-startTimeB) / 60000)
-    $('stopwatch-time').innerHTML = minutes + ":" + Math.floor((Date.now()-startTimeB) % 60000 / 1000);
-    $('stopwatch-minutes').value = minutes
+    stopwatchStart.innerHTML = "Stop"
+    stopwatchStart.style.background = "red";
+
+    clearTimeout(timing);
+    timing = setInterval(() => {
+      minutes = Math.floor((Date.now()-startTime) / 60000)
+      stopwatch.innerHTML = minutes + ":" + Math.floor((Date.now()-startTime) % 60000 / 1000);
+      $('title')[0].innerHTML = stopwatch.innerHTML
+  
+      if(minutesWas != minutes)$('stopwatch-minutes').value = minutes
+      minutesWas = minutes
+
+      
+    },1000);
   }
 })
 
@@ -111,7 +128,11 @@ function addTime() {
   })
 }
 
-// Chart
+
+///////////
+// Chart //
+///////////
+
 
 function chartChange(num){
   var client = selectValue('chart-client');
@@ -197,7 +218,11 @@ function chartChange(num){
   }
 }
 
-// Clients
+
+/////////////
+// Clients //
+/////////////
+
 
 var clientData;
 

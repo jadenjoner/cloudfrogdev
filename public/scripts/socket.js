@@ -9,6 +9,10 @@ socket.on('message', (msg)=>{
   message(msg);
 })
 
+socket.on('loginPopup', ()=> {
+  openPopup('login-popup', 0.7);
+})
+
 function message(msg){
   var timeout1;
   var timeout2;

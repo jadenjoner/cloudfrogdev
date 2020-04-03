@@ -44,16 +44,17 @@ BgWhite = "\x1b[47m"
 
 console.log(BgGreen + " Server Started " + Reset)
 
-// Socket Connection
+// New Socket Connection
 io.on('connection', function (socket) {
 
   var username = false
 
   console.log(FgGreen + "new connection: " + FgCyan + socket.id + Reset)
-  socket.emit('connected')
+  //socket.emit('connected')
 
   clients[socket.id] = {
     username: false,
+    socket: socket,
   }
   var client = clients[socket.id];
 
@@ -68,7 +69,7 @@ io.on('connection', function (socket) {
   ///////////
 
   socket.on('login', (request) => {
-    if (request.type == 1) { // User tried to log in with popup
+    if (request.type == 1) { // if user tried to log in with popup
       var error = true;
       for (var i in dbv.users) {
         if (dbv.users[i].username == request.username) {
@@ -84,7 +85,7 @@ io.on('connection', function (socket) {
 
 
             client.username = dbv.users[i].username;
-            username = clients[socket.id].username
+            username = client.username
           }
         }
       }
@@ -96,7 +97,7 @@ io.on('connection', function (socket) {
         })
       }
     }
-    else if (request.type == 0) { // User tried to register with popup
+    else if (request.type == 0) { // if user tried to register with popup
       var uniq = true;
       for (var i in dbv.users) {
         if (dbv.users[i].username == request.username) {
@@ -147,7 +148,7 @@ io.on('connection', function (socket) {
         })
       }
     }
-    else if (request.type == 2) { // User auto cookie login
+    else if (request.type == 2) { // if user auto cookie login
       for (var i in dbv.users) {
         if (dbv.users[i].cookie == request.password) {
           error = false;
@@ -160,7 +161,7 @@ io.on('connection', function (socket) {
 
 
           client.username = dbv.users[i].username;
-          username = clients[socket.id].username
+          username = client.username
 
           console.log(FgGreen + "new login (cookie): " + FgCyan + username + " : " + socket.id + Reset)
           break;
@@ -201,7 +202,7 @@ io.on('connection', function (socket) {
       db1.write();
       sendClientData(socket, username);
     }
-    else message("an error occured. Please reload page", socket)
+    else loginPopup(socket); 
   })
 
   socket.on('client data', (msg)=>{
@@ -221,6 +222,7 @@ io.on('connection', function (socket) {
         }
       }
     }
+    else loginPopup(socket); 
   })
 
   socket.on('leave client', (client)=>{
@@ -314,7 +316,6 @@ io.on('connection', function (socket) {
                     self: false,
                     client: dbv.clients[i].name
                   }
-                  console.log("written")
                   db1.write();
                   sendClientData(socket, username)
                   socket.emit('share popup', dbv.clients[i].name)
@@ -343,6 +344,16 @@ io.on('connection', function (socket) {
       }
     }
     db1.write();
+    
+    for(var b in clients){
+      if(clients[b].username == username && b != socket.id){
+        for(var i in dbv.users){
+            if(dbv.users[i].username == username){
+            clients[b].socket.emit("stopwatch", dbv.users[i].stopwatch)
+          }
+        }
+      }
+    }
   })
 
   socket.on('stopwatch request', ()=>{
@@ -361,6 +372,13 @@ io.on('connection', function (socket) {
 
 
 function sendClientData(socket, username){
+
+  if(!username){
+    loginPopup(socket);
+    return;
+  }
+    
+
   var toSend = [];
     var t = 0;
     for(var i in dbv.clients){
@@ -445,4 +463,10 @@ function scorePassword(pass) {
     score += (variationCount - 1) * 10;
 
     return parseInt(score);
+}
+
+
+function loginPopup(socket){
+	socket.emit("loginPopup");
+	console.log("yep");
 }
