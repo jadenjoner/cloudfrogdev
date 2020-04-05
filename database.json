@@ -3,11 +3,11 @@
     {
       "username": "admin",
       "password": "password",
-      "cookie": 0.9679531454554402,
+      "cookie": 0.9318754754893892,
       "stopwatch": {
         "running": false,
-        "startTime": 1585951452768,
-        "buffer": 1585954025586
+        "startTime": 0,
+        "buffer": 0
       }
     }
   ],
@@ -15,149 +15,5 @@
     "clearData": false,
     "logoutAll": false
   },
-  "clients": [
-    {
-      "name": "F",
-      "owner": "admin",
-      "users": []
-    },
-    {
-      "name": "Nightingale Counseling",
-      "owner": "admin",
-      "users": [
-        {
-          "name": "admin",
-          "admin": true,
-          "chart": [
-            {
-              "client": "Nightingale Counseling",
-              "type": "updates",
-              "notes": "",
-              "date": "27/3/2020",
-              "minutes": "3"
-            }
-          ],
-          "client": "Nightingale Counseling",
-          "self": true
-        }
-      ]
-    },
-    {
-      "name": "Granite Home Loans",
-      "owner": "admin",
-      "users": [
-        {
-          "name": "admin",
-          "admin": true,
-          "chart": [
-            {
-              "client": "Granite Home Loans",
-              "type": "updates",
-              "notes": "",
-              "date": "27/3/2020",
-              "minutes": "2"
-            }
-          ],
-          "client": "Granite Home Loans",
-          "self": true
-        }
-      ]
-    },
-    {
-      "name": "Global Energy Clearing",
-      "owner": "admin",
-      "users": [
-        {
-          "name": "admin",
-          "admin": true,
-          "chart": [
-            {
-              "client": "Global Energy Clearing",
-              "type": "updates",
-              "notes": "",
-              "date": "27/3/2020",
-              "minutes": "2"
-            }
-          ],
-          "client": "Global Energy Clearing",
-          "self": true
-        }
-      ]
-    },
-    {
-      "name": "Romano Capital",
-      "owner": "admin",
-      "users": [
-        {
-          "name": "admin",
-          "admin": true,
-          "chart": [
-            {
-              "client": "Romano Capital",
-              "type": "updates",
-              "notes": "cedars",
-              "date": "27/3/2020",
-              "minutes": "2"
-            },
-            {
-              "client": "Romano Capital",
-              "type": "updates",
-              "notes": "romano",
-              "date": "27/3/2020",
-              "minutes": "3"
-            },
-            {
-              "client": "Romano Capital",
-              "type": "updates",
-              "notes": "2creeks",
-              "date": "27/3/2020",
-              "minutes": "4"
-            }
-          ],
-          "client": "Romano Capital",
-          "self": true
-        }
-      ]
-    },
-    {
-      "name": "tester",
-      "owner": "admin",
-      "users": []
-    },
-    {
-      "name": "tester3",
-      "owner": "admin",
-      "users": []
-    },
-    {
-      "name": "newtest",
-      "owner": "admin",
-      "users": []
-    },
-    {
-      "name": "testtt",
-      "owner": "admin",
-      "users": []
-    },
-    {
-      "name": "testtt1",
-      "owner": "admin",
-      "users": []
-    },
-    {
-      "name": "tester123",
-      "owner": "admin",
-      "users": []
-    },
-    {
-      "name": "newtest324",
-      "owner": "admin",
-      "users": []
-    },
-    {
-      "name": "waefwe43",
-      "owner": "admin",
-      "users": []
-    }
-  ]
+  "clients": []
 }

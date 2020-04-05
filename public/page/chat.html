@@ -3,6 +3,12 @@
 <div id="chat-outer">
     <div id="chat-left">
       <div id="chat-groups">
+
+        <div class="message-add">
+          <input type="text" placeholder="Group Name"/> 
+          <input type="button" value="add"/> 
+        </div>
+
         <div id="chat-list">
           <div class="message-box">
             <div>
@@ -29,13 +35,6 @@
     <div id="chat-right">
       <div id="chat-messages-outer">
         <div id="chat-messages">
-          <div class="message">Hello this is a test message. This is dummy text as you can see. This is text hello this is text message this is. This isnt a text message? It is</div>
-          <div class="message message-self">Who is this</div>
-          <div class="message">Its me</div>
-          <div class="message">Joe</div>
-          <div class="message message-self">I dont know any joe</div>
-          <div class="message">Yes you do</div>
-          <div class="message">Joe Smith</div>
           <div class="message-name right"><div>2:32 AM, today</div>You</div>
           <div class="message message-self">Sorry joe, you have the wrong number</div>
           <div class="message-name left">Joe<div>2:42 AM, today</div></div>
@@ -107,6 +106,11 @@
     color: #eeeeee70;
     font-size: 17px;
   }
+  .message-add{
+    margin: 20px;
+  }
+
+
   .mb-bottom{
     padding: 10px;
     margin-top: -10px;
@@ -212,7 +216,7 @@
     padding: 0 10px;
     max-width: 80%;
     width: 300px;
-}
+  }
 #message-input:focus{
   border-color: rgb(100, 110, 220);
 }
