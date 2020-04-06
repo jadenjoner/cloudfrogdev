@@ -5,31 +5,11 @@
       <div id="chat-groups">
 
         <div class="message-add">
-          <input type="text" placeholder="Group Name"/> 
-          <input type="button" value="add"/> 
+          <input id="chat-add-input" class="input-text" type="text" placeholder="Chat Name"/> 
+          <div class="input-button" value="Create" onclick="addChat()" style="display: inline-block">Add</div> 
         </div>
 
-        <div id="chat-list">
-          <div class="message-box">
-            <div>
-              <h4>The Chat Test</h4>
-              <div class="mb-date">Yesterday</div>
-            </div>
-            <div class="mb-bottom">
-              (Joe) Hello this is a text message test that has been sent to this chat app
-            </div>
-          </div>
-
-          <div class="message-box">
-            <div>
-              <h4>The Chat Test</h4>
-              <div class="mb-date">Yesterday</div>
-            </div>
-            <div class="mb-bottom">
-              (Joe) Hello this is a text message test that has been sent to this chat app
-            </div>
-          </div>
-        </div>
+        <div id="chat-list"></div>
       </div>
     </div>
     <div id="chat-right">

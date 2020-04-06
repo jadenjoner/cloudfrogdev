@@ -379,9 +379,58 @@ io.on('connection', function (socket) {
       loginPopup(socket);
   })
 
+  socket.on("chat list", () => {
+    sendChatData(socket, username);
+  })
 
+
+  socket.on("chat add", (msg)=>{
+    dbv.chat.push({
+      name: msg,
+      owner: username,
+      users: [username],
+      messages: []
+    })
+    db1.write();
+    sendChatData(socket, username);
+  });
 
 })
+
+
+
+function sendChatData(socket, username){
+  if(username){
+  var toSend = [
+      {
+        title: "The Test Group Chat",
+        msg: "(bob) Hello this is test",
+        date: "Apr 2",
+        admin: true
+      }
+    ];
+    var toSend = []
+    
+    for(var i in dbv.chat){
+      for(var b in dbv.chat[i].users){
+        if(dbv.chat[i].users[b] == username){
+          console.log("Found match for user "+username+" of " + dbv.chat[i].name)
+          toSend[toSend.length] = {
+            title: dbv.chat[i].name,
+            msg: "(user) Latest Message",
+            date: "Apr 3",
+            amdin: dbv.chat[i].owner == username
+          }
+        }
+      }
+    }
+    console.log(toSend);
+
+    socket.emit("chat list", toSend);
+
+  }
+  else loginPopup(socket)
+}
 
 
 

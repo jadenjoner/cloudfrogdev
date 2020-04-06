@@ -15,5 +15,72 @@
     "clearData": false,
     "logoutAll": false
   },
+  "chat": [
+    {
+      "name": "The Test",
+      "owner": "admin",
+      "users": [
+        "admin",
+        "tester"
+      ],
+      "messages": []
+    },
+    {
+      "name": "wegweg",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": []
+    },
+    {
+      "name": "wegweg",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": []
+    },
+    {
+      "name": "awd",
+      "owner": false,
+      "users": [
+        false
+      ],
+      "messages": []
+    },
+    {
+      "name": "gwewge",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": []
+    },
+    {
+      "name": "",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": []
+    },
+    {
+      "name": "",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": []
+    },
+    {
+      "name": "",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": []
+    }
+  ],
   "clients": []
 }

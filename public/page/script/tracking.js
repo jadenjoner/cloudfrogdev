@@ -41,8 +41,6 @@ function stopwatchStart(){
   
       if(minutesWas != minutes)$('stopwatch-minutes').value = minutes
       minutesWas = minutes
-
-      
     },100);
 
     socket.emit('stopwatch', {
