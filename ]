@@ -22,13 +22,9 @@ socket.on("chat list", (msg) => {
   var toWrite = "";
   
   for(var i in msg){
-    var shareText = msg[i].admin 
+    var shareText = "not"
     if(msg[i].admin){
-      shareText = '<div class="mb-share"><i>share</i></div>'
-      shareText += '<div class="mb-share red"><i>delete</i></div>'
-    }
-    else{
-      shareText = '<div class="mb-share red"><i>exit_to_app</i></div>'
+      shareText = '<div class="mb-share">share</div>'
     }
     toWrite += ' \
     <div class="message-box"> \

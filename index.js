@@ -419,7 +419,7 @@ function sendChatData(socket, username){
             title: dbv.chat[i].name,
             msg: "(user) Latest Message",
             date: "Apr 3",
-            amdin: dbv.chat[i].owner == username
+            admin: dbv.chat[i].owner == username
           }
         }
       }

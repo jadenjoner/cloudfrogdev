@@ -3,11 +3,11 @@
     {
       "username": "admin",
       "password": "password",
-      "cookie": 0.1442704453214858,
+      "cookie": 0.3020896436456837,
       "stopwatch": {
-        "running": true,
-        "startTime": 1586544093760,
-        "buffer": 1586542949411
+        "running": false,
+        "startTime": 0,
+        "buffer": 0
       }
     }
   ],
@@ -42,6 +42,22 @@
     },
     {
       "name": "tester",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": []
+    },
+    {
+      "name": "wgea",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": []
+    },
+    {
+      "name": "w",
       "owner": "admin",
       "users": [
         "admin"
