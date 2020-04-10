@@ -3,30 +3,21 @@
     {
       "username": "admin",
       "password": "password",
-      "cookie": 0.9318754754893892,
+      "cookie": 0.1442704453214858,
       "stopwatch": {
-        "running": false,
-        "startTime": 0,
-        "buffer": 0
+        "running": true,
+        "startTime": 1586544093760,
+        "buffer": 1586542949411
       }
     }
   ],
   "config": {
     "clearData": false,
-    "logoutAll": false
+    "logoutAll": true
   },
   "chat": [
     {
-      "name": "The Test",
-      "owner": "admin",
-      "users": [
-        "admin",
-        "tester"
-      ],
-      "messages": []
-    },
-    {
-      "name": "wegweg",
+      "name": "Grop Chat 334",
       "owner": "admin",
       "users": [
         "admin"
@@ -34,7 +25,7 @@
       "messages": []
     },
     {
-      "name": "wegweg",
+      "name": "THE TEST",
       "owner": "admin",
       "users": [
         "admin"
@@ -42,15 +33,7 @@
       "messages": []
     },
     {
-      "name": "awd",
-      "owner": false,
-      "users": [
-        false
-      ],
-      "messages": []
-    },
-    {
-      "name": "gwewge",
+      "name": "new",
       "owner": "admin",
       "users": [
         "admin"
@@ -58,23 +41,7 @@
       "messages": []
     },
     {
-      "name": "",
-      "owner": "admin",
-      "users": [
-        "admin"
-      ],
-      "messages": []
-    },
-    {
-      "name": "",
-      "owner": "admin",
-      "users": [
-        "admin"
-      ],
-      "messages": []
-    },
-    {
-      "name": "",
+      "name": "tester",
       "owner": "admin",
       "users": [
         "admin"
@@ -82,5 +49,27 @@
       "messages": []
     }
   ],
-  "clients": []
+  "clients": [
+    {
+      "name": "test",
+      "owner": "admin",
+      "users": [
+        {
+          "name": "admin",
+          "admin": true,
+          "chart": [
+            {
+              "client": "test",
+              "type": "awfe",
+              "notes": "b",
+              "date": "10/4/2020",
+              "minutes": "4"
+            }
+          ],
+          "client": "test",
+          "self": true
+        }
+      ]
+    }
+  ]
 }

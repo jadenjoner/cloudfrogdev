@@ -41,6 +41,7 @@ socket.on("chat list", (msg) => {
 
 function addChat(){
   socket.emit("chat add", $('chat-add-input').value )
+  $('chat-add-input').value = "";
 }
 
 /*

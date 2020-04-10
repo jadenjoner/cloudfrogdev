@@ -487,6 +487,7 @@ if(dbv.config.clearData == 2){
   dbv.config.clearData = false;
   dbv.users = [];
   dbv.clients = [];
+  dbv.chat = [];
   db1.write();
 }
 

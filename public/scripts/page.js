@@ -1,6 +1,10 @@
 var loading = false;
 
-function page(page="unknown"){
+function page(page="unknown", icon){
+  /*
+  $('i-side')[icon-1].style.background = "#fff";
+  $('i-side')[icon-1].style.color = "#222";
+  */
 
   globalPage = page;
   $('h1').innerHTML = page;
@@ -30,6 +34,21 @@ function page(page="unknown"){
   }
 
   $("tab-button0").className += " active";
+
+
+  icons = $('icon-side')
+  console.log(icons[0].style);
+
+  for(var i in icons){
+    if(icons[i].style != undefined){
+      icons[i].style.background = "#ffffff00"
+      icons[i].style.color = "white"
+    }
+  }
+  if(icons[icon-1].style != undefined){
+    icons[icon-1].style.background = "white"
+    icons[icon-1].style.color = "black"
+  }
 }
 
 function tab(number) {

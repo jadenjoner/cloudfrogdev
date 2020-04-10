@@ -1,4 +1,4 @@
-page("Home") // Go to home page
+page("Home", 1) // Go to home page
 
 
 login(2) // Try to login with cookie

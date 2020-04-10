@@ -188,31 +188,21 @@ button:focus {outline:0;}
 /* Sidebar */
 
 .icon{
-  
-  width: 40px;
   padding: 5px 20px;
-  
 }
 
-.icon img{
-  width: 40px;
+.icon i{
+  font-size: 40px;
   padding: 5px;
   margin: -5px;
   background: #ffffff07;
   border-radius: 999vh;
-  transition: background 0.2s;
+  transition: 0.4s;
 }
 
-.icon.home img{
-  background: #ffffff;
-}
-
-.icon:hover img{
+.icon:hover i{
   cursor: pointer;
-  background: #ffffff25;
-}
-.icon.home:hover img{
-  background: rgba(255, 255, 255, 0.842);
+  transform: rotate(5deg);
 }
 
 aside{
@@ -524,3 +514,33 @@ select {
   border-radius: 5px;
   transition: 0.2s;
 }
+
+
+
+/* Google Icons */
+
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v50/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+i {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -moz-font-feature-settings: 'liga';
+  -moz-osx-font-smoothing: grayscale;
+}
+
