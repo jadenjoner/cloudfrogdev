@@ -138,7 +138,7 @@ io.on('connection', function (socket) {
             cookie: null,
           })
         }
-
+        
       }
       else {
         socket.emit('login', {
@@ -262,7 +262,7 @@ io.on('connection', function (socket) {
                   db1.write();
                   sendClientData(socket, username)
                   socket.emit('share popup', dbv.clients[i].name)
-                  console.log(FgYellow + "user update: " + FgCyan +  username + Reset + " share removed of client " + FgCyan + msg.client + Reset)
+    		  console.log(FgYellow + "user update: " + FgCyan +  username + Reset + " share removed of client " + FgCyan + msg.client + Reset)
                 }
               }
             }
@@ -309,7 +309,7 @@ io.on('connection', function (socket) {
             if(dbv.clients[i].users[b].admin){
               for(var c in dbv.users){
                 if(dbv.users[c].username == msg.username){
-                  dbv.clients[i].users[dbv.clients[i].users.length] = {
+                    dbv.clients[i].users[dbv.clients[i].users.length] = {
                     name: msg.username,
                     admin: false,
                     chart: [],
@@ -337,18 +337,18 @@ io.on('connection', function (socket) {
     for(var i in dbv.users){
       if(dbv.users[i].username == username){
         dbv.users[i].stopwatch = {
-          running: msg.running,
-          startTime: msg.startTime,
-          buffer: msg.timeBuffer
+            running: msg.running,
+            startTime: msg.startTime,
+            buffer: msg.timeBuffer
         }
       }
     }
     db1.write();
-
+    
     for(var b in clients){
       if(clients[b].username == username && b != socket.id){
         for(var i in dbv.users){
-          if(dbv.users[i].username == username){
+            if(dbv.users[i].username == username){
             clients[b].socket.emit("stopwatch", dbv.users[i].stopwatch)
           }
         }
@@ -365,9 +365,9 @@ io.on('connection', function (socket) {
   })
 
 
-
+  
   // Account Requests
-
+  
 
   socket.on("account data", () => {
     if(username){
@@ -397,27 +397,11 @@ io.on('connection', function (socket) {
 
 
   // Chat
+  
 
-
-  socket.on("chat share remove", (msg) => {
+  socket.on("chat remove share", (msg) => {
     for(var i in dbv.chat)
-      if(dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
-        for(var b in dbv.chat[i].users)
-          if(dbv.chat[i].users[b] == msg.user){
-            dbv.chat[i].users.splice(b, 1)  
-            sendChatData(socket, username);
-            db1.write();
-          }
-  })
-
-
-  socket.on("chat share add", (msg) => {
-    console.log(msg)
-    for(var i in dbv.chat)
-      if(dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
-        dbv.chat[i].users.push(msg.user)  
-    sendChatData(socket, username);
-    db1.write();
+      if(dbv.chat[i].name == msg.chat) console.log("found " + msg.chat)
   })
 
 })
@@ -426,7 +410,7 @@ io.on('connection', function (socket) {
 
 function sendChatData(socket, username){
   if(username){
-    var toSend = [
+  var toSend = [
       {
         title: "The Test Group Chat",
         msg: "(bob) Hello this is test",
@@ -435,7 +419,7 @@ function sendChatData(socket, username){
       }
     ];
     var toSend = []
-
+    
     for(var i in dbv.chat){
       for(var b in dbv.chat[i].users){
         if(dbv.chat[i].users[b] == username){
@@ -469,42 +453,42 @@ function sendClientData(socket, username){
     loginPopup(socket);
     return;
   }
-
+    
 
   var toSend = [];
-  var t = 0;
-  for(var i in dbv.clients){
-    var admin = false
-    var name
-    for(var b in dbv.clients[i].users){
-      name = dbv.clients[i].users[b].name
-      if(name == username){
-        toSend[t] = dbv.clients[i].users[b]
-        toSend[t].client = dbv.clients[i].name;
-        toSend[t].self = true;
-        t++;
-        if(dbv.clients[i].users[b].admin)
-          admin = true;
-
-        break
-      }
-    }
-
-    if(admin){
+    var t = 0;
+    for(var i in dbv.clients){
+      var admin = false
+      var name
       for(var b in dbv.clients[i].users){
-        name2 = dbv.clients[i].users[b].name
-        if(name2 != name){
+        name = dbv.clients[i].users[b].name
+        if(name == username){
           toSend[t] = dbv.clients[i].users[b]
           toSend[t].client = dbv.clients[i].name;
-          toSend[t].self = false;
+          toSend[t].self = true;
           t++;
+          if(dbv.clients[i].users[b].admin)
+            admin = true;
+
+          break
+        }
+      }
+      
+      if(admin){
+          for(var b in dbv.clients[i].users){
+          name2 = dbv.clients[i].users[b].name
+          if(name2 != name){
+            toSend[t] = dbv.clients[i].users[b]
+            toSend[t].client = dbv.clients[i].name;
+            toSend[t].self = false;
+            t++;
+          }
         }
       }
     }
-  }
-  toSend[toSend.length] = username
+    toSend[toSend.length] = username
 
-  socket.emit('client data', toSend)
+    socket.emit('client data', toSend)
 }
 
 if(dbv.config.logoutAll == true)logoutAll();
@@ -530,36 +514,36 @@ function message(msg, socket){
 
 
 function scorePassword(pass) {
-  var score = 0;
-  if (!pass)
-    return score;
+    var score = 0;
+    if (!pass)
+        return score;
 
-  // award every unique letter until 5 repetitions
-  var letters = new Object();
-  for (var i=0; i<pass.length; i++) {
-    letters[pass[i]] = (letters[pass[i]] || 0) + 1;
-    score += 5.0 / letters[pass[i]];
-  }
+    // award every unique letter until 5 repetitions
+    var letters = new Object();
+    for (var i=0; i<pass.length; i++) {
+        letters[pass[i]] = (letters[pass[i]] || 0) + 1;
+        score += 5.0 / letters[pass[i]];
+    }
 
-  // bonus points for mixing it up
-  var variations = {
-    digits: /\d/.test(pass),
-    lower: /[a-z]/.test(pass),
-    upper: /[A-Z]/.test(pass),
-    nonWords: /\W/.test(pass),
-  }
+    // bonus points for mixing it up
+    var variations = {
+        digits: /\d/.test(pass),
+        lower: /[a-z]/.test(pass),
+        upper: /[A-Z]/.test(pass),
+        nonWords: /\W/.test(pass),
+    }
 
-  variationCount = 0;
-  for (var check in variations) {
-    variationCount += (variations[check] == true) ? 1 : 0;
-  }
-  score += (variationCount - 1) * 10;
+    variationCount = 0;
+    for (var check in variations) {
+        variationCount += (variations[check] == true) ? 1 : 0;
+    }
+    score += (variationCount - 1) * 10;
 
-  return parseInt(score);
+    return parseInt(score);
 }
 
 
 function loginPopup(socket){
-  socket.emit("loginPopup");
-  console.log("yep");
+	socket.emit("loginPopup");
+	console.log("yep");
 }

@@ -3,10 +3,10 @@
     {
       "username": "admin",
       "password": "password",
-      "cookie": 0.3020896436456837,
+      "cookie": 0.016647817194344494,
       "stopwatch": {
-        "running": false,
-        "startTime": 0,
+        "running": true,
+        "startTime": 1586561019152,
         "buffer": 0
       }
     }
@@ -17,18 +17,18 @@
   },
   "chat": [
     {
-      "name": "Grop Chat 334",
+      "name": "test",
       "owner": "admin",
       "users": [
-        "admin"
-      ],
-      "messages": []
-    },
-    {
-      "name": "THE TEST",
-      "owner": "admin",
-      "users": [
-        "admin"
+        "new",
+        "new",
+        "new",
+        "t",
+        "testers",
+        "testers",
+        "testers",
+        "testers",
+        "testers"
       ],
       "messages": []
     },
@@ -41,23 +41,7 @@
       "messages": []
     },
     {
-      "name": "tester",
-      "owner": "admin",
-      "users": [
-        "admin"
-      ],
-      "messages": []
-    },
-    {
-      "name": "wgea",
-      "owner": "admin",
-      "users": [
-        "admin"
-      ],
-      "messages": []
-    },
-    {
-      "name": "w",
+      "name": "awe",
       "owner": "admin",
       "users": [
         "admin"
@@ -83,6 +67,27 @@
             }
           ],
           "client": "test",
+          "self": true
+        }
+      ]
+    },
+    {
+      "name": "new32",
+      "owner": "admin",
+      "users": [
+        {
+          "name": "admin",
+          "admin": true,
+          "chart": [
+            {
+              "client": "new32",
+              "type": "awe",
+              "notes": "f",
+              "date": "10/4/2020",
+              "minutes": "12"
+            }
+          ],
+          "client": "new32",
           "self": true
         }
       ]

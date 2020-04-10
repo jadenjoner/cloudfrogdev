@@ -26,6 +26,18 @@
     </div>
 </div>
 
+
+<div id="chat-popup">
+  <h3>Share Chat</h3>
+  <div id="chat-popup-outer"></div>
+  <div class="input-outer" style="border-radius: 0">
+    <input placeholder="Username" class="input-text" id="chat-client-input"></input>
+    <input onclick="chatShareAdd()" class="input-button" type="button" value="Share">
+  </div>
+    <div id="chat-popup-close" onclick="closePopup('chat-popup'); selectedChat = ''">close</div>
+</div>
+
+
 <style>
 
   #message-title{
@@ -224,6 +236,98 @@
   }
 #message-input:focus{
   border-color: rgb(100, 110, 220);
+}
+
+
+
+/* Popup */
+
+#chat-popup{
+  width: 500px;
+  border-radius: 20px;
+  background: white;
+  z-index: 1010;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  text-align: center;
+}
+#chat-popup h3{
+  padding: 20px;
+  font-size: 40px;
+}
+#chat-popup-outer{
+  width: 93%;
+  background: #ddd;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 10px;
+  
+}
+
+.chat-popup-item{
+  background: #222;
+  text-align: left;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.chat-popup-name{
+  color: #eee;
+  display: inline-block;
+  text-align: left;
+  font-weight: 500;
+}
+.chat-popup-admin{
+  color: #bbb;
+  display: inline-block;
+  text-align: right;
+  float:right;
+  background: #444;
+  font-weight: 500;
+  margin: -5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.chat-popup-remove{
+  color: #eee;
+  display: inline-block;
+  text-align: right;
+  float:right;
+  background: #f62;
+  font-weight: 500;
+  margin: -5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+#chat-popup-close{
+  color: #eee;
+  display: inline-block;
+  text-align: right;
+  background: #1e3e94ff;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 999vh;
+  margin: 20px auto;
+  transition: background: 0.2s;
+}
+#chat-popup-close:hover{
+  cursor: pointer;
+  background: #183083ff;
+}
+.chat-popup-admin:hover{
+  cursor: pointer;
+  border: 2px solid black;
+  margin: -7px;
+  
+}
+.chat-popup-remove:hover{
+  cursor: pointer;
+  margin: -7px;
+  margin-left: 18px;
+  border: 2px solid black;
 }
 
 

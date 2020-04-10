@@ -1,4 +1,6 @@
 var chatResp = 0;
+var chatData = false;
+var selectedChat = false; // Selected chat name when share popup
 
 $('chat-messages-outer').scrollTop = $('chat-messages-outer').scrollHeight;
 
@@ -19,12 +21,14 @@ else{
 
 socket.emit("chat list")
 socket.on("chat list", (msg) => {
+  chatData = msg;
+  console.log(msg)
   var toWrite = "";
-  
+
   for(var i in msg){
     var shareText = msg[i].admin 
     if(msg[i].admin){
-      shareText = '<div class="mb-share"><i>share</i></div>'
+      shareText = '<div class="mb-share" onclick="chatShare(\''+msg[i].title+'\')"><i>share</i></div>'
       shareText += '<div class="mb-share red"><i>delete</i></div>'
     }
     else{
@@ -45,8 +49,9 @@ socket.on("chat list", (msg) => {
   }
 
   $('chat-list').innerHTML = toWrite
+  
+  refreshShare();
 
-  console.log(msg)
 });
 
 function addChat(){
@@ -54,15 +59,47 @@ function addChat(){
   $('chat-add-input').value = "";
 }
 
-/*
-          <div class="message-box">
-            <div>
-              <h4>The Chat Test</h4>
-              <div class="mb-date">Yesterday</div>
-            </div>
-            <div class="mb-bottom">
-              (Joe) Hello this is a text message test that has been sent to this chat app
-            </div>
-          </div>
+function chatShare(name){
+  selectedChat = name
 
-*/
+  var toWrite = "";
+
+
+  for(var i in chatData){
+    if(chatData[i].title == name){
+      for(var b in chatData[i].users){
+        var deleteButton = ""; 
+        if(chatData[i].owner != chatData[i].users[b])deleteButton = '<div class="chat-popup-remove" onclick="chatRemove(\''+i+'\', \''+b+'\')">X</div>' 
+        toWrite += '\
+        <div class="chat-popup-item">\
+          <div class="chat-popup-name">'+chatData[i].users[b]+'</div>\
+           '+deleteButton+'\
+        </div>\
+        '
+      }
+    }
+  }
+  $('chat-popup-outer').innerHTML = toWrite;
+
+
+  openPopup("chat-popup", 0.3)
+}
+
+function refreshShare(){
+  if(selectedChat)chatShare(selectedChat) 
+}
+
+
+function chatRemove(i, b){
+  socket.emit('chat share remove', {
+    chat: chatData[i].title,
+    user: chatData[i].users[b]
+  })
+}
+
+function chatShareAdd(){
+  socket.emit('chat share add', {
+    chat: selectedChat,
+    user: $('chat-client-input').value 
+  })
+}
