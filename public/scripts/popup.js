@@ -53,10 +53,14 @@ function login(type=1){
   }
 }
 
+var username= false;
 socket.on('login', (msg) => {
   if(msg.action){
     closePopup("login-popup");
     setCookie("login", msg.cookie);
+    username = msg.username
+    $('input-password').value = ''
+    console.log("set username to " + msg.username)
   }
   else $('input-password').value = "";
   $('error-message').innerHTML = msg.message;

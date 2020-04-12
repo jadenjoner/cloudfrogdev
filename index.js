@@ -81,6 +81,7 @@ io.on('connection', function (socket) {
               action: 1,
               message: "",
               cookie: dbv.users[i].cookie,
+              username: dbv.users[i].username,
             })
 
 
@@ -157,6 +158,7 @@ io.on('connection', function (socket) {
             action: 1,
             message: "",
             cookie: dbv.users[i].cookie,
+            username: dbv.users[i].username
           })
 
 
@@ -412,15 +414,71 @@ io.on('connection', function (socket) {
 
 
   socket.on("chat share add", (msg) => {
-    console.log(msg)
+    var foundUser = false
     for(var i in dbv.chat)
       if(dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
-        dbv.chat[i].users.push(msg.user)  
-    sendChatData(socket, username);
-    db1.write();
+        for(var b in dbv.users)
+          if(dbv.users[b].username == msg.user){
+            dbv.chat[i].users.push(msg.user)  
+            sendChatData(socket, username);
+            db1.write();
+            foundUser = true
+            break;
+          }
+    if(!foundUser)message("username not found", socket)
   })
 
-})
+
+  socket.on("get messages", (name) => {
+    for(var i in dbv.chat){
+      if(dbv.chat[i].name == name){
+        for(var b in dbv.chat[i].users)
+          if(dbv.chat[i].users[b] == username){
+            var toSend = {
+              a: dbv.chat[i].messages,
+              b: name // The name of the chat
+            }
+            socket.emit("messages", toSend) 
+
+            break;
+          }
+        break;
+      }
+    }
+  });
+
+
+  socket.on("add message", (msg) => {
+    const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+    for(var i in dbv.chat)
+      if(dbv.chat[i].name == msg.chat){
+        for(var b in dbv.chat[i].users)
+          if(dbv.chat[i].users[b] == username){
+            now = new Date()
+            date = monthNames[now.getMonth()] + " " + now.getDate()
+            dbv.chat[i].messages.push({
+              user: username,
+              date: date,
+              message: msg.message
+            });
+            db1.write();
+            for(var c in clients)
+              for(var b in dbv.chat[i].users){
+                var toSend = {
+                  a: dbv.chat[i].messages,
+                  b: dbv.chat[i].name 
+                }
+
+                if(dbv.chat[i].users[b] == clients[c].username)clients[c].socket.emit("messages", toSend)
+              }
+            break;
+          }
+        break;
+      }
+  });
+
+}); // End //
 
 
 
@@ -439,7 +497,6 @@ function sendChatData(socket, username){
     for(var i in dbv.chat){
       for(var b in dbv.chat[i].users){
         if(dbv.chat[i].users[b] == username){
-          console.log("Found match for user "+username+" of " + dbv.chat[i].name)
           toSend[toSend.length] = {
             title: dbv.chat[i].name,
             msg: "(user) Latest Message",
@@ -450,7 +507,6 @@ function sendChatData(socket, username){
         }
       }
     }
-    console.log(toSend);
 
     socket.emit("chat list", toSend);
 

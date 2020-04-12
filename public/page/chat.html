@@ -1,5 +1,3 @@
-<h2 id="message-title">Joe</h2>
-
 <div id="chat-outer">
     <div id="chat-left">
       <div id="chat-groups">
@@ -14,14 +12,9 @@
     </div>
     <div id="chat-right">
       <div id="chat-messages-outer">
-        <div id="chat-messages">
-          <div class="message-name right"><div>2:32 AM, today</div>You</div>
-          <div class="message message-self">Sorry joe, you have the wrong number</div>
-          <div class="message-name left">Joe<div>2:42 AM, today</div></div>
-          <div class="message">What do you mean number? This is cloud frog</div>
-        </div>
+        <div id="chat-messages"></div>
         <input id="message-input" type="text" placeholder="Message"></input>
-        <img id="message-submit" src="img/uparrow-white.svg"/> 
+        <img id="message-submit" onclick="submitMessage()" src="img/uparrow-white.svg"/> 
       </div>
     </div>
 </div>
@@ -231,6 +224,7 @@
     border: 3px solid #555;
     font-size: 20px;
     padding: 0 10px;
+    padding-right: 50px;
     max-width: 80%;
     width: 300px;
   }

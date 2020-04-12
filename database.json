@@ -3,10 +3,20 @@
     {
       "username": "admin",
       "password": "password",
-      "cookie": 0.016647817194344494,
+      "cookie": 0.9457316889868432,
+      "stopwatch": {
+        "running": false,
+        "startTime": 1586639597441,
+        "buffer": 1586639604134
+      }
+    },
+    {
+      "username": "sirone",
+      "password": "password",
+      "cookie": 0.8646490317810938,
       "stopwatch": {
         "running": true,
-        "startTime": 1586561019152,
+        "startTime": 1586644352953,
         "buffer": 0
       }
     }
@@ -17,20 +27,219 @@
   },
   "chat": [
     {
-      "name": "test",
+      "name": "tester",
       "owner": "admin",
       "users": [
-        "new",
-        "new",
-        "new",
-        "t",
-        "testers",
-        "testers",
-        "testers",
-        "testers",
-        "testers"
+        "admin",
+        "sirone"
       ],
-      "messages": []
+      "messages": [
+        {
+          "user": "admin",
+          "date": "today",
+          "message": "hello"
+        },
+        {
+          "user": "sirone",
+          "date": "yesterday",
+          "message": "this is a test"
+        },
+        {
+          "user": "admin",
+          "date": "today",
+          "message": "test"
+        },
+        {
+          "user": "admin",
+          "date": "2020-04-11T22:29:20.236Z",
+          "message": "Hello"
+        },
+        {
+          "user": "sirone",
+          "date": "2020-04-11T22:29:25.898Z",
+          "message": "S"
+        },
+        {
+          "user": "admin",
+          "date": "2020-04-11T22:29:37.003Z",
+          "message": "no"
+        },
+        {
+          "user": "sirone",
+          "date": "2020-04-11T22:31:22.661Z",
+          "message": "what!"
+        },
+        {
+          "user": "sirone",
+          "date": "2020-04-11T22:33:20.355Z",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "2020-04-11T22:33:25.186Z",
+          "message": "what is it?"
+        },
+        {
+          "user": "sirone",
+          "date": "Apr 11",
+          "message": "Hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "what"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "Hello this is a long text message as a test to see what it would look thike in this text thi"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "https://cloudfrog.cf"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "serrgesgres"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "meltedcore.com"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "http://meltedcore.com"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "http://meltedcore.com/logo.png"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "http://localhost"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "https://2cv53j3vbvei3ojork2nx2qr-wpengine.netdna-ssl.com/wp-content/uploads/2019/08/mc-5-1-4.svg"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "https://2cv53j3vbvei3ojork2nx2qr-wpengine.netdna-ssl.com/wp-content/uploads/2019/09/new-alarm-clock-sketch-1-2.svg this is a picture"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "https://2cv53j3vbvei3ojork2nx2qr-wpengine.netdna-ssl.com/wp-content/uploads/2019/09/new-alarm-clock-sketch-1-2.svg https://meltedcore.com"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "awef"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "https://ddg.com"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "http://2cv53j3vbvei3ojork2nx2qr-wpengine.netdna-ssl.com/wp-content/uploads/2019/09/new-alarm-clock-sketch-1-2.svg"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "https://meltedcore.com/about"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "afew"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "afew"
+        },
+        {
+          "user": "sirone",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "t"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "sirone",
+          "date": "Apr 11",
+          "message": "!"
+        },
+        {
+          "user": "sirone",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "a"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "a"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "a"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "c"
+        },
+        {
+          "user": "sirone",
+          "date": "Apr 11",
+          "message": "w"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "q"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "wef"
+        }
+      ]
     },
     {
       "name": "new",
@@ -38,57 +247,188 @@
       "users": [
         "admin"
       ],
-      "messages": []
+      "messages": [
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "no"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "ahello"
+        }
+      ]
     },
     {
-      "name": "awe",
+      "name": "WHAT",
       "owner": "admin",
       "users": [
-        "admin"
+        "admin",
+        "sirone"
       ],
-      "messages": []
+      "messages": [
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "test"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "test"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "aa"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "aa"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "aa"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "no"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "you there?"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "test"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "."
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": ".asdf"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "zz"
+        },
+        {
+          "user": "sirone",
+          "date": "Apr 11",
+          "message": "a"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 11",
+          "message": "wef"
+        }
+      ]
     }
   ],
   "clients": [
     {
       "name": "test",
-      "owner": "admin",
+      "owner": "sirone",
       "users": [
         {
-          "name": "admin",
+          "name": "sirone",
           "admin": true,
-          "chart": [
-            {
-              "client": "test",
-              "type": "awfe",
-              "notes": "b",
-              "date": "10/4/2020",
-              "minutes": "4"
-            }
-          ],
+          "chart": [],
           "client": "test",
           "self": true
-        }
-      ]
-    },
-    {
-      "name": "new32",
-      "owner": "admin",
-      "users": [
+        },
         {
           "name": "admin",
           "admin": true,
-          "chart": [
-            {
-              "client": "new32",
-              "type": "awe",
-              "notes": "f",
-              "date": "10/4/2020",
-              "minutes": "12"
-            }
-          ],
-          "client": "new32",
-          "self": true
+          "chart": [],
+          "self": false,
+          "client": "test"
         }
       ]
     }

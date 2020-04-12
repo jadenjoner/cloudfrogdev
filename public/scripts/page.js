@@ -7,7 +7,6 @@ function page(page="unknown", icon){
   */
 
   globalPage = page;
-  $('h1').innerHTML = page;
   $('content').innerHTML = "";
 
   loading = true;

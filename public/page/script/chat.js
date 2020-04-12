@@ -1,6 +1,7 @@
 var chatResp = 0;
 var chatData = false;
 var selectedChat = false; // Selected chat name when share popup
+var chat = false;
 
 $('chat-messages-outer').scrollTop = $('chat-messages-outer').scrollHeight;
 
@@ -35,7 +36,7 @@ socket.on("chat list", (msg) => {
       shareText = '<div class="mb-share red"><i>exit_to_app</i></div>'
     }
     toWrite += ' \
-    <div class="message-box"> \
+    <div class="message-box" onclick="selectChat(\''+msg[i].title+'\')"> \
       <div> \
         <h4>'+msg[i].title+'</h4> \
         '+shareText+'\
@@ -49,10 +50,15 @@ socket.on("chat list", (msg) => {
   }
 
   $('chat-list').innerHTML = toWrite
-  
+
   refreshShare();
 
 });
+
+function selectChat(name){
+  chat = name
+  socket.emit("get messages", name);
+}
 
 function addChat(){
   socket.emit("chat add", $('chat-add-input').value )
@@ -102,4 +108,44 @@ function chatShareAdd(){
     chat: selectedChat,
     user: $('chat-client-input').value 
   })
+}
+
+
+socket.on('messages', (msgB) => { // When messages are recived
+  if(msgB.b == chat){
+    msg = msgB.a
+
+    var toWrite = ""
+
+    for(var i in msg){
+      var isSelf = '';
+      if(msg[i].user == username){
+        isSelf = ' message-self'
+        toWrite += '<div class="message-name right"><div>'+msg[i].date+'</div>'+msg[i].user+'</div>'
+      }
+      else toWrite += '<div class="message-name left">'+msg[i].user+'<div>'+msg[i].date+'</div></div>'
+      toWrite += '<div class="message'+isSelf+'">'+textConvert(msg[i].message)+'</div>'
+
+    }
+    console.log(msg)
+
+    $('chat-messages').innerHTML = toWrite
+    $('chat-messages-outer').scrollTop = $('chat-messages-outer').scrollHeight;
+
+  }
+})
+
+
+$('message-input').addEventListener("keyup", function(event) {
+  if (event.key === "Enter") {
+    submitMessage();
+  }
+});
+
+function submitMessage(){
+  console.log("submit message")
+  socket.emit("add message", {
+    message: $('message-input').value,
+    chat: chat,
+  });
 }

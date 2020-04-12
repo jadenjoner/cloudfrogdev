@@ -1,8 +1,10 @@
 
+var globalData = false;
 
 
-socket.on('connected', ()=>{
+socket.on('connected', (msg)=>{
   page('Home');
+  globalData = msg;
 })
 
 socket.on('message', (msg)=>{

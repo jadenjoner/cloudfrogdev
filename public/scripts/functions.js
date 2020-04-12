@@ -38,3 +38,23 @@ function $(value){
 function selectValue(text){
   return $(text).options[$(text).selectedIndex].value;
 }
+
+
+function linkify(text) {
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlRegex, function(url) {
+        return '<a target="_blank" style="color:inherit" href="' + url + '">' + url + '</a>';
+    });
+}
+
+function imgify(text) {
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])*(.png|.jpg|.gif|.jpeg|.svg)/ig;
+    return text.replace(urlRegex, function(url) {
+        return '<img style="width:100%;height: auto;background:#eee;border-radius: 10px" src="' + url + '"/>';
+    });
+}
+
+
+function textConvert(text){
+  return imgify(linkify(text))
+}
