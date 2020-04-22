@@ -1,33 +1,7 @@
 var widthWas;
 
 setInterval(() => {
-  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-  //if(width != widthWas) window.scrollTo(0,1);
-  widthWas = width
 
-  if(width < 600){
-    $('search-form').style.display = "none";
-    $('box').style.width = "100%";
-    $('box').style.borderRadius = "0";
-  }
-  else{
-    $('search-form').style.display = "";
-    $('box').style.width = "70%";
-    $('box').style.borderRadius = "17px";
-  }
-
-  if(width < 1000){
-    $('box').style.width = "100%";
-    $('box').style.borderRadius = "0";
-  }
-  else{
-    $('box').style.width = "70%";
-    $('box').style.borderRadius = "17px";
-  }
-
-
-  var scroll = (window.pageYOffset || document.scrollTop)  - (document.clientTop || 0);
-  
   topper = document.getElementsByClassName('topper')
   if(scroll < 0){
     for(var i in topper){
@@ -61,7 +35,7 @@ function toggleAccount(){
     $('notify-box').style.display = "none"
     $('account-img').style.background = "#65b"
     $('notify-img').style.background = "#ffffff00"
-    
+
     socket.emit("account data") // Ask for accound data from server
   }
   else{

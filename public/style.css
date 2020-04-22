@@ -256,14 +256,6 @@ h1{
   text-align: center;
 }
 
-
-@media screen and (max-width: 1000px) {
-  #content{
-    padding: 5px;
-    border-radius: 5px;
-  }
-}
-
 .tab{
   overflow: hidden;
   background: #ddd;
@@ -549,4 +541,22 @@ i {
   direction: ltr;
   -moz-font-feature-settings: 'liga';
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+@media screen and (max-width: 1000px) {
+  #content{
+    padding: 5px;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #search-form{
+    display:none;
+  }
+  #box{
+    width: 100%;
+    border-radius: 0;
+  }
 }
