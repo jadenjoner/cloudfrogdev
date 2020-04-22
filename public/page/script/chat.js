@@ -136,7 +136,10 @@ socket.on('messages', (msgB) => { // When messages are recived
     console.log(msg)
 
     $('chat-messages').innerHTML = toWrite
-    $('chat-messages-outer').scrollTop = $('chat-messages-outer').scrollHeight;
+
+    setTimeout(()=>{
+      $('chat-messages-outer').scrollTop = $('chat-messages-outer').scrollHeight;
+    }, 40)
 
   }
 })
@@ -154,4 +157,5 @@ function submitMessage(){
     message: $('message-input').value,
     chat: chat,
   });
+  $('message-input').value = '';
 }

@@ -37,6 +37,8 @@
   #chat-close{
     margin-bottom: -45px;
     display: none;
+    text-align:left;
+    padding-left: 5px;
   }
 
   #chat-close i{
@@ -62,23 +64,6 @@
   #chat-right{
     width: 60%;
     float: right;
-  }
-
-  @media screen and (max-width: 1000px) {
-    #chat-left{
-      width: 100%;
-      float: none;
-    }
-    #chat-right{
-      width: 100%;
-      display: none;
-    }
-    #chat-back{
-      display: block;
-    }
-    #chat-close{
-      display: block;
-    }
   }
 
   #chat-groups{
@@ -167,6 +152,7 @@
     border-radius: 20px;
     height: 70vh;
     overflow-y: auto;
+    overflow-x: hidden;
   }
   #chat-messages{
     padding: 20px;
@@ -235,6 +221,7 @@
     margin-bottom: -15.6px;
     margin-left: -52px;
     border: 3px solid rgb(100, 110, 220);
+    margin-right: -12px;
 
   }
   #message-submit:hover{
@@ -353,6 +340,37 @@
   margin: -7px;
   margin-left: 18px;
   border: 2px solid black;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+  #chat-left{
+    width: 100%;
+    float: none;
+  }
+  #chat-right{
+    width: 100%;
+    display: none;
+    background: #eee;
+  }
+  #chat-back{
+    display: block;
+  }
+  #chat-close{
+    display: block;
+  }
+  #chat-groups{
+    border-radius: 0;
+  }
+  #chat-outer{
+    padding: 0;
+  }
+
 }
 
 

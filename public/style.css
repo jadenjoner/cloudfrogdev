@@ -256,6 +256,14 @@ h1{
   text-align: center;
 }
 
+
+@media screen and (max-width: 1000px) {
+  #content{
+    padding: 5px;
+    border-radius: 5px;
+  }
+}
+
 .tab{
   overflow: hidden;
   background: #ddd;
