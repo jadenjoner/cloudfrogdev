@@ -1,24 +1,12 @@
 var chatResp = 0;
 var chatData = false;
 var selectedChat = false; // Selected chat name when share popup
-var chat = false;
+var chat = false; // Chat selected when viewing messages
 
 $('chat-messages-outer').scrollTop = $('chat-messages-outer').scrollHeight;
 
 
 var width = $("content").offsetWidth;
-if(width < 800){
-  chatResp = 1
-  $("chat-left").style.width = "100%";
-  $("chat-right").style.width = "100%";
-  $("chat-right").style.display = "none"
-}
-else{
-  chatResp = 0
-  $("chat-left").style.width = "40%";
-  $("chat-right").style.width = "60%";
-  $("chat-right").style.display = "block"
-}
 
 socket.emit("chat list")
 socket.on("chat list", (msg) => {
@@ -27,13 +15,13 @@ socket.on("chat list", (msg) => {
   var toWrite = "";
 
   for(var i in msg){
-    var shareText = msg[i].admin 
+    var shareText = msg[i].admin
     if(msg[i].admin){
       shareText = '<div class="mb-share" onclick="chatShare(\''+msg[i].title+'\')"><i>share</i></div>'
-      shareText += '<div class="mb-share red"><i>delete</i></div>'
+      shareText += '<div class="mb-share red" onclick="chatDel(\''+msg[i].title+'\')"><i>delete</i></div>'
     }
     else{
-      shareText = '<div class="mb-share red"><i>exit_to_app</i></div>'
+      shareText = '<div class="mb-share red" onclick="chatExit(\''+msg[i].title+'\')"><i>exit_to_app</i></div>'
     }
     toWrite += ' \
     <div class="message-box" onclick="selectChat(\''+msg[i].title+'\')"> \
@@ -55,8 +43,15 @@ socket.on("chat list", (msg) => {
 
 });
 
+function chatBack(){
+  $('chat-right').style.display = "none"
+  $('chat-left').style.display = "block"
+}
+
 function selectChat(name){
   chat = name
+  $('chat-right').style.display = "block"
+  $('chat-left').style.display = "none"
   socket.emit("get messages", name);
 }
 
@@ -74,8 +69,8 @@ function chatShare(name){
   for(var i in chatData){
     if(chatData[i].title == name){
       for(var b in chatData[i].users){
-        var deleteButton = ""; 
-        if(chatData[i].owner != chatData[i].users[b])deleteButton = '<div class="chat-popup-remove" onclick="chatRemove(\''+i+'\', \''+b+'\')">X</div>' 
+        var deleteButton = "";
+        if(chatData[i].owner != chatData[i].users[b])deleteButton = '<div class="chat-popup-remove" onclick="chatDel(\''+i+'\', \''+b+'\')">X</div>'
         toWrite += '\
         <div class="chat-popup-item">\
           <div class="chat-popup-name">'+chatData[i].users[b]+'</div>\
@@ -91,8 +86,17 @@ function chatShare(name){
   openPopup("chat-popup", 0.3)
 }
 
+function chatExit(name){
+  socket.emit("chat exit", name)
+}
+
+function chatDel(name){
+  socket.emit("chat del", name)
+}
+
+
 function refreshShare(){
-  if(selectedChat)chatShare(selectedChat) 
+  if(selectedChat)chatShare(selectedChat)
 }
 
 
@@ -106,7 +110,7 @@ function chatRemove(i, b){
 function chatShareAdd(){
   socket.emit('chat share add', {
     chat: selectedChat,
-    user: $('chat-client-input').value 
+    user: $('chat-client-input').value
   })
 }
 

@@ -45,7 +45,7 @@ BgWhite = "\x1b[47m"
 console.log(BgGreen + " Server Started " + Reset)
 
 // New Socket Connection
-io.on('connection', function (socket) {
+io.on('connection', function(socket) {
 
   var username = false
 
@@ -97,8 +97,7 @@ io.on('connection', function (socket) {
           cookie: null,
         })
       }
-    }
-    else if (request.type == 0) { // if user tried to register with popup
+    } else if (request.type == 0) { // if user tried to register with popup
       var uniq = true;
       for (var i in dbv.users) {
         if (dbv.users[i].username == request.username) {
@@ -107,8 +106,8 @@ io.on('connection', function (socket) {
         }
       }
       if (uniq) {
-        if(request.username.length >= 5){
-          if(scorePassword(request.password) > 30){
+        if (request.username.length >= 5) {
+          if (scorePassword(request.password) > 30) {
             dbv.users.push({
               username: request.username,
               password: request.password,
@@ -123,16 +122,14 @@ io.on('connection', function (socket) {
               message: "Registerd; you can now login",
               cookie: null,
             })
-          }
-          else{
+          } else {
             socket.emit('login', {
               action: 0,
               message: "Passwrord is too weak",
               cookie: null,
             })
           }
-        }
-        else{
+        } else {
           socket.emit('login', {
             action: 0,
             message: "Username must be at least 5 letters",
@@ -140,16 +137,14 @@ io.on('connection', function (socket) {
           })
         }
 
-      }
-      else {
+      } else {
         socket.emit('login', {
           action: 0,
           message: "Username already exists",
           cookie: null,
         })
       }
-    }
-    else if (request.type == 2) { // if user auto cookie login
+    } else if (request.type == 2) { // if user auto cookie login
       for (var i in dbv.users) {
         if (dbv.users[i].cookie == request.password) {
           error = false;
@@ -178,13 +173,13 @@ io.on('connection', function (socket) {
   /////////////////////
 
   socket.on('add client', (name) => {
-    if(username){
-      for(var i in dbv.clients){
-        if(dbv.clients[i].name == name){
+    if (username) {
+      for (var i in dbv.clients) {
+        if (dbv.clients[i].name == name) {
           message("Client allready exists", socket)
           return;
         }
-        if(name.length < 5){
+        if (name.length < 5) {
           message("Client name is less than 5 letters", socket)
           return
         }
@@ -193,54 +188,51 @@ io.on('connection', function (socket) {
       dbv.clients.push({
         name: name,
         owner: username,
-        users:[
-          {
-            name: username,
-            admin: true,
-            chart: [],
-          }
-        ]
+        users: [{
+          name: username,
+          admin: true,
+          chart: [],
+        }]
       });
       db1.write();
       sendClientData(socket, username);
-    }
-    else loginPopup(socket); 
+    } else loginPopup(socket);
   })
 
-  socket.on('client data', (msg)=>{
+  socket.on('client data', (msg) => {
     sendClientData(socket, username)
   })
 
-  socket.on('add time', (msg)=>{
-    if(username){
-      for(var i in dbv.clients){
-        if(dbv.clients[i].name == msg.client)for(var b in dbv.clients[i].users){
-          if(dbv.clients[i].users[b].name == username){
-            dbv.clients[i].users[b].chart.push(msg)
-            db1.write();
-            message("time added", socket)
-            break;
+  socket.on('add time', (msg) => {
+    if (username) {
+      for (var i in dbv.clients) {
+        if (dbv.clients[i].name == msg.client)
+          for (var b in dbv.clients[i].users) {
+            if (dbv.clients[i].users[b].name == username) {
+              dbv.clients[i].users[b].chart.push(msg)
+              db1.write();
+              message("time added", socket)
+              break;
+            }
           }
-        }
       }
-    }
-    else loginPopup(socket); 
+    } else loginPopup(socket);
   })
 
-  socket.on('leave client', (client)=>{
-    console.log(FgYellow + "user update: " + FgCyan +  username + Reset + " left client " + FgCyan + client + Reset)
+  socket.on('leave client', (client) => {
+    console.log(FgYellow + "user update: " + FgCyan + username + Reset + " left client " + FgCyan + client + Reset)
 
-    for(var i in dbv.clients){
+    for (var i in dbv.clients) {
       var name1 = dbv.clients[i].name
       var name2 = client
-      if(name1 == name2){
-        for(var b in dbv.clients[i].users){
+      if (name1 == name2) {
+        for (var b in dbv.clients[i].users) {
           name1 = dbv.clients[i].users[b].name
           name2 = username
-          if(name1 == name2){
+          if (name1 == name2) {
             dbv.clients[i].users.splice(b, 1)
             db1.write()
-            sendClientData(socket,username)
+            sendClientData(socket, username)
           }
           //break;
         }
@@ -250,25 +242,24 @@ io.on('connection', function (socket) {
   })
 
 
-  // Remove Share 
+  // Remove Share
 
-  socket.on('remove share', (msg)=>{
-    for(var i in dbv.clients){
-      if(dbv.clients[i].name == msg.client){
-        for(var b in dbv.clients[i].users){
-          if(dbv.clients[i].users[b].name == username){
-            if(dbv.clients[i].users[b].admin){              
-              for(var b in dbv.clients[i].users){
-                if(dbv.clients[i].users[b].name == msg.name){
+  socket.on('remove share', (msg) => {
+    for (var i in dbv.clients) {
+      if (dbv.clients[i].name == msg.client) {
+        for (var b in dbv.clients[i].users) {
+          if (dbv.clients[i].users[b].name == username) {
+            if (dbv.clients[i].users[b].admin) {
+              for (var b in dbv.clients[i].users) {
+                if (dbv.clients[i].users[b].name == msg.name) {
                   dbv.clients[i].users.splice(b, 1)
                   db1.write();
                   sendClientData(socket, username)
                   socket.emit('share popup', dbv.clients[i].name)
-                  console.log(FgYellow + "user update: " + FgCyan +  username + Reset + " share removed of client " + FgCyan + msg.client + Reset)
+                  console.log(FgYellow + "user update: " + FgCyan + username + Reset + " share removed of client " + FgCyan + msg.client + Reset)
                 }
               }
-            }
-            else message("It seems that you are not admin", socket)
+            } else message("It seems that you are not admin", socket)
           }
         }
       }
@@ -277,24 +268,23 @@ io.on('connection', function (socket) {
 
 
 
-  // Set Admin 
+  // Set Admin
 
-  socket.on('set admin', (msg)=>{
-    for(var i in dbv.clients){
-      if(dbv.clients[i].name == msg.client){
-        for(var b in dbv.clients[i].users){
-          if(dbv.clients[i].users[b].name == username){
-            if(dbv.clients[i].users[b].admin){
-              for(var b in dbv.clients[i].users){
-                if(dbv.clients[i].users[b].name == msg.name){
+  socket.on('set admin', (msg) => {
+    for (var i in dbv.clients) {
+      if (dbv.clients[i].name == msg.client) {
+        for (var b in dbv.clients[i].users) {
+          if (dbv.clients[i].users[b].name == username) {
+            if (dbv.clients[i].users[b].admin) {
+              for (var b in dbv.clients[i].users) {
+                if (dbv.clients[i].users[b].name == msg.name) {
                   dbv.clients[i].users[b].admin = msg.admin
                   db1.write();
                   sendClientData(socket, username)
                   socket.emit('share popup', dbv.clients[i].name)
                 }
               }
-            }
-            else message("You are not admin", socket)
+            } else message("You are not admin", socket)
           }
         }
       }
@@ -303,14 +293,14 @@ io.on('connection', function (socket) {
 
   // Add client share
 
-  socket.on('add share', (msg)=>{
-    for(var i in dbv.clients){
-      if(dbv.clients[i].name == msg.client){
-        for(var b in dbv.clients[i].users){
-          if(dbv.clients[i].users[b].name == username){
-            if(dbv.clients[i].users[b].admin){
-              for(var c in dbv.users){
-                if(dbv.users[c].username == msg.username){
+  socket.on('add share', (msg) => {
+    for (var i in dbv.clients) {
+      if (dbv.clients[i].name == msg.client) {
+        for (var b in dbv.clients[i].users) {
+          if (dbv.clients[i].users[b].name == username) {
+            if (dbv.clients[i].users[b].admin) {
+              for (var c in dbv.users) {
+                if (dbv.users[c].username == msg.username) {
                   dbv.clients[i].users[dbv.clients[i].users.length] = {
                     name: msg.username,
                     admin: false,
@@ -322,8 +312,7 @@ io.on('connection', function (socket) {
                   sendClientData(socket, username)
                   socket.emit('share popup', dbv.clients[i].name)
                   break
-                }
-                else message("The user does not exist", socket)
+                } else message("The user does not exist", socket)
               }
             }
           }
@@ -335,9 +324,9 @@ io.on('connection', function (socket) {
 
   // stop watch
 
-  socket.on('stopwatch', (msg)=>{
-    for(var i in dbv.users){
-      if(dbv.users[i].username == username){
+  socket.on('stopwatch', (msg) => {
+    for (var i in dbv.users) {
+      if (dbv.users[i].username == username) {
         dbv.users[i].stopwatch = {
           running: msg.running,
           startTime: msg.startTime,
@@ -347,10 +336,10 @@ io.on('connection', function (socket) {
     }
     db1.write();
 
-    for(var b in clients){
-      if(clients[b].username == username && b != socket.id){
-        for(var i in dbv.users){
-          if(dbv.users[i].username == username){
+    for (var b in clients) {
+      if (clients[b].username == username && b != socket.id) {
+        for (var i in dbv.users) {
+          if (dbv.users[i].username == username) {
             clients[b].socket.emit("stopwatch", dbv.users[i].stopwatch)
           }
         }
@@ -358,9 +347,9 @@ io.on('connection', function (socket) {
     }
   })
 
-  socket.on('stopwatch request', ()=>{
-    for(var i in dbv.users){
-      if(dbv.users[i].username == username){
+  socket.on('stopwatch request', () => {
+    for (var i in dbv.users) {
+      if (dbv.users[i].username == username) {
         socket.emit("stopwatch", dbv.users[i].stopwatch)
       }
     }
@@ -372,12 +361,11 @@ io.on('connection', function (socket) {
 
 
   socket.on("account data", () => {
-    if(username){
+    if (username) {
       socket.emit("account data", {
         username: username
       })
-    }
-    else
+    } else
       loginPopup(socket);
   })
 
@@ -386,7 +374,7 @@ io.on('connection', function (socket) {
   })
 
 
-  socket.on("chat add", (msg)=>{
+  socket.on("chat add", (msg) => {
     dbv.chat.push({
       name: msg,
       owner: username,
@@ -402,11 +390,11 @@ io.on('connection', function (socket) {
 
 
   socket.on("chat share remove", (msg) => {
-    for(var i in dbv.chat)
-      if(dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
-        for(var b in dbv.chat[i].users)
-          if(dbv.chat[i].users[b] == msg.user){
-            dbv.chat[i].users.splice(b, 1)  
+    for (var i in dbv.chat)
+      if (dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
+        for (var b in dbv.chat[i].users)
+          if (dbv.chat[i].users[b] == msg.user) {
+            dbv.chat[i].users.splice(b, 1)
             sendChatData(socket, username);
             db1.write();
           }
@@ -415,33 +403,54 @@ io.on('connection', function (socket) {
 
   socket.on("chat share add", (msg) => {
     var foundUser = false
-    for(var i in dbv.chat)
-      if(dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
-        for(var b in dbv.users)
-          if(dbv.users[b].username == msg.user){
-            dbv.chat[i].users.push(msg.user)  
+    for (var i in dbv.chat)
+      if (dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
+        for (var b in dbv.users)
+          if (dbv.users[b].username == msg.user) {
+            dbv.chat[i].users.push(msg.user)
             sendChatData(socket, username);
             db1.write();
             foundUser = true
             break;
           }
-    if(!foundUser)message("username not found", socket)
+    if (!foundUser) message("username not found", socket)
+  })
+
+  socket.on("chat exit", (chat) => {
+    for (var i in dbv.chat)
+      if (dbv.chat[i].name == chat)
+        for (var b in dbv.chat[i].users)
+          if (dbv.chat[i].users[b] == username) {
+            dbv.chat[i].users.splice(b, 1)
+            sendChatData(socket, username);
+            db1.write();
+            break;
+          }
+  })
+  
+  socket.on("chat del", (chat) => {
+    for (var i in dbv.chat)
+    if (dbv.chat[i].name == chat && dbv.chat[i].owner == username){
+      dbv.chat.splice(i, 1)
+      sendChatData(socket, username);
+      db1.write();
+    }
   })
 
 
   socket.on("get messages", (name) => {
-    for(var i in dbv.chat){
-      if(dbv.chat[i].name == name){
-        for(var b in dbv.chat[i].users)
-          if(dbv.chat[i].users[b] == username){
-            var toSend = {
-              a: dbv.chat[i].messages,
-              b: name // The name of the chat
-            }
-            socket.emit("messages", toSend) 
-
-            break;
+    for (var i in dbv.chat) {
+      if (dbv.chat[i].name == name) {
+        for (var b in dbv.chat[i].users)
+        if (dbv.chat[i].users[b] == username) {
+          var toSend = {
+            a: dbv.chat[i].messages,
+            b: name // The name of the chat
           }
+          socket.emit("messages", toSend)
+
+          break;
+        }
         break;
       }
     }
@@ -449,12 +458,12 @@ io.on('connection', function (socket) {
 
 
   socket.on("add message", (msg) => {
-    const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-    for(var i in dbv.chat)
-      if(dbv.chat[i].name == msg.chat){
-        for(var b in dbv.chat[i].users)
-          if(dbv.chat[i].users[b] == username){
+    for (var i in dbv.chat)
+    if (dbv.chat[i].name == msg.chat) {
+        for (var b in dbv.chat[i].users)
+          if (dbv.chat[i].users[b] == username) {
             now = new Date()
             date = monthNames[now.getMonth()] + " " + now.getDate()
             dbv.chat[i].messages.push({
@@ -463,14 +472,14 @@ io.on('connection', function (socket) {
               message: msg.message
             });
             db1.write();
-            for(var c in clients)
-              for(var b in dbv.chat[i].users){
+            for (var c in clients)
+              for (var b in dbv.chat[i].users) {
                 var toSend = {
                   a: dbv.chat[i].messages,
-                  b: dbv.chat[i].name 
+                  b: dbv.chat[i].name
                 }
 
-                if(dbv.chat[i].users[b] == clients[c].username)clients[c].socket.emit("messages", toSend)
+                if (dbv.chat[i].users[b] == clients[c].username) clients[c].socket.emit("messages", toSend)
               }
             break;
           }
@@ -482,21 +491,19 @@ io.on('connection', function (socket) {
 
 
 
-function sendChatData(socket, username){
-  if(username){
-    var toSend = [
-      {
-        title: "The Test Group Chat",
-        msg: "(bob) Hello this is test",
-        date: "Apr 2",
-        admin: true
-      }
-    ];
+function sendChatData(socket, username) {
+  if (username) {
+    var toSend = [{
+      title: "The Test Group Chat",
+      msg: "(bob) Hello this is test",
+      date: "Apr 2",
+      admin: true
+    }];
     var toSend = []
 
-    for(var i in dbv.chat){
-      for(var b in dbv.chat[i].users){
-        if(dbv.chat[i].users[b] == username){
+    for (var i in dbv.chat) {
+      for (var b in dbv.chat[i].users) {
+        if (dbv.chat[i].users[b] == username) {
           toSend[toSend.length] = {
             title: dbv.chat[i].name,
             msg: "(user) Latest Message",
@@ -510,8 +517,7 @@ function sendChatData(socket, username){
 
     socket.emit("chat list", toSend);
 
-  }
-  else loginPopup(socket)
+  } else loginPopup(socket)
 }
 
 
@@ -519,9 +525,9 @@ function sendChatData(socket, username){
 
 
 
-function sendClientData(socket, username){
+function sendClientData(socket, username) {
 
-  if(!username){
+  if (!username) {
     loginPopup(socket);
     return;
   }
@@ -529,27 +535,27 @@ function sendClientData(socket, username){
 
   var toSend = [];
   var t = 0;
-  for(var i in dbv.clients){
+  for (var i in dbv.clients) {
     var admin = false
     var name
-    for(var b in dbv.clients[i].users){
+    for (var b in dbv.clients[i].users) {
       name = dbv.clients[i].users[b].name
-      if(name == username){
+      if (name == username) {
         toSend[t] = dbv.clients[i].users[b]
         toSend[t].client = dbv.clients[i].name;
         toSend[t].self = true;
         t++;
-        if(dbv.clients[i].users[b].admin)
+        if (dbv.clients[i].users[b].admin)
           admin = true;
 
         break
       }
     }
 
-    if(admin){
-      for(var b in dbv.clients[i].users){
+    if (admin) {
+      for (var b in dbv.clients[i].users) {
         name2 = dbv.clients[i].users[b].name
-        if(name2 != name){
+        if (name2 != name) {
           toSend[t] = dbv.clients[i].users[b]
           toSend[t].client = dbv.clients[i].name;
           toSend[t].self = false;
@@ -563,9 +569,9 @@ function sendClientData(socket, username){
   socket.emit('client data', toSend)
 }
 
-if(dbv.config.logoutAll == true)logoutAll();
+if (dbv.config.logoutAll == true) logoutAll();
 
-if(dbv.config.clearData == 2){
+if (dbv.config.clearData == 2) {
   dbv.config.clearData = false;
   dbv.users = [];
   dbv.clients = [];
@@ -580,7 +586,7 @@ function logoutAll() {
 }
 
 
-function message(msg, socket){
+function message(msg, socket) {
   socket.emit("message", msg)
 }
 
@@ -592,7 +598,7 @@ function scorePassword(pass) {
 
   // award every unique letter until 5 repetitions
   var letters = new Object();
-  for (var i=0; i<pass.length; i++) {
+  for (var i = 0; i < pass.length; i++) {
     letters[pass[i]] = (letters[pass[i]] || 0) + 1;
     score += 5.0 / letters[pass[i]];
   }
@@ -615,7 +621,7 @@ function scorePassword(pass) {
 }
 
 
-function loginPopup(socket){
+function loginPopup(socket) {
   socket.emit("loginPopup");
   console.log("yep");
 }

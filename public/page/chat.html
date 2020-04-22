@@ -3,18 +3,19 @@
       <div id="chat-groups">
 
         <div class="message-add">
-          <input id="chat-add-input" class="input-text" type="text" placeholder="Chat Name"/> 
-          <div class="input-button" value="Create" onclick="addChat()" style="display: inline-block">Add</div> 
+          <input id="chat-add-input" class="input-text" type="text" placeholder="Chat Name"/>
+          <div class="input-button" value="Create" onclick="addChat()" style="display: inline-block">Add</div>
         </div>
 
         <div id="chat-list"></div>
       </div>
     </div>
     <div id="chat-right">
+      <div id="chat-close" onclick="chatBack()"><i>close</i></div>
       <div id="chat-messages-outer">
         <div id="chat-messages"></div>
         <input id="message-input" type="text" placeholder="Message"></input>
-        <img id="message-submit" onclick="submitMessage()" src="img/uparrow-white.svg"/> 
+        <img id="message-submit" onclick="submitMessage()" src="img/uparrow-white.svg"/>
       </div>
     </div>
 </div>
@@ -33,6 +34,17 @@
 
 <style>
 
+  #chat-close{
+    margin-bottom: -45px;
+    display: none;
+  }
+
+  #chat-close i{
+    background: #ccc;
+    border-radius: 5px;
+    font-size: 45px;
+  }
+
   #message-title{
     padding-bottom: 35px;
     margin-top: -30px;
@@ -43,12 +55,32 @@
     //background: #ddd;
     border-radius: 20px;
   }
-
-
   #chat-left{
     width: 40%;
     float: left;
   }
+  #chat-right{
+    width: 60%;
+    float: right;
+  }
+
+  @media screen and (max-width: 1000px) {
+    #chat-left{
+      width: 100%;
+      float: none;
+    }
+    #chat-right{
+      width: 100%;
+      display: none;
+    }
+    #chat-back{
+      display: block;
+    }
+    #chat-close{
+      display: block;
+    }
+  }
+
   #chat-groups{
     background: #222;
     border-radius: 20px;
@@ -113,7 +145,7 @@
     transition: 0.2s;
     margin-right: 10px;
   }
-    
+
   .mb-share i{
     font-size: 30px;
   }
@@ -129,11 +161,8 @@
   }
 
 
-  
-  #chat-right{
-    width: 60%;
-    float: right;
-  }
+
+
   #chat-messages-outer{
     border-radius: 20px;
     height: 70vh;
@@ -206,7 +235,7 @@
     margin-bottom: -15.6px;
     margin-left: -52px;
     border: 3px solid rgb(100, 110, 220);
-    
+
   }
   #message-submit:hover{
     transition: 0.4s;
@@ -227,6 +256,8 @@
     padding-right: 50px;
     max-width: 80%;
     width: 300px;
+    bottom: 0;
+    bottom: 0;
   }
 #message-input:focus{
   border-color: rgb(100, 110, 220);
@@ -257,7 +288,7 @@
   border-radius: 5px;
   margin: 0 auto;
   padding: 10px;
-  
+
 }
 
 .chat-popup-item{
@@ -315,7 +346,7 @@
   cursor: pointer;
   border: 2px solid black;
   margin: -7px;
-  
+
 }
 .chat-popup-remove:hover{
   cursor: pointer;

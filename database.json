@@ -3,17 +3,17 @@
     {
       "username": "admin",
       "password": "password",
-      "cookie": 0.9457316889868432,
+      "cookie": 0.3118929053538806,
       "stopwatch": {
         "running": false,
-        "startTime": 1586639597441,
-        "buffer": 1586639604134
+        "startTime": 0,
+        "buffer": 0
       }
     },
     {
       "username": "sirone",
       "password": "password",
-      "cookie": 0.8646490317810938,
+      "cookie": 0.1564882115328894,
       "stopwatch": {
         "running": true,
         "startTime": 1586644352953,
@@ -29,10 +29,7 @@
     {
       "name": "tester",
       "owner": "admin",
-      "users": [
-        "admin",
-        "sirone"
-      ],
+      "users": [],
       "messages": [
         {
           "user": "admin",
@@ -244,9 +241,7 @@
     {
       "name": "new",
       "owner": "admin",
-      "users": [
-        "admin"
-      ],
+      "users": [],
       "messages": [
         {
           "user": "admin",
@@ -273,10 +268,7 @@
     {
       "name": "WHAT",
       "owner": "admin",
-      "users": [
-        "admin",
-        "sirone"
-      ],
+      "users": [],
       "messages": [
         {
           "user": "admin",
@@ -407,6 +399,55 @@
           "user": "admin",
           "date": "Apr 11",
           "message": "wef"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 13",
+          "message": "hello"
+        }
+      ]
+    },
+    {
+      "name": "test",
+      "owner": "admin",
+      "users": [
+        "admin"
+      ],
+      "messages": [
+        {
+          "user": "admin",
+          "date": "Apr 21",
+          "message": "hello"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 21",
+          "message": "this"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 21",
+          "message": "is"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 21",
+          "message": "a"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 21",
+          "message": "text"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 21",
+          "message": "message"
+        },
+        {
+          "user": "admin",
+          "date": "Apr 21",
+          "message": "a"
         }
       ]
     }
@@ -421,13 +462,13 @@
           "admin": true,
           "chart": [],
           "client": "test",
-          "self": true
+          "self": false
         },
         {
           "name": "admin",
           "admin": true,
           "chart": [],
-          "self": false,
+          "self": true,
           "client": "test"
         }
       ]

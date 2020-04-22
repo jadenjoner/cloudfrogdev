@@ -303,7 +303,7 @@ h1{
 #message{
   position: fixed;
   z-index: 1030;
-  background: #eee; 
+  background: #eee;
   border-radius: 5px;
   padding: 5px;
   bottom: 5px;
@@ -337,7 +337,7 @@ h1{
   max-height: 100vh;
   position: fixed;
   z-index: 1010;
-  background: #eee; 
+  background: #eee;
   border-radius: 20px;
   display: none;
 }
@@ -542,4 +542,3 @@ i {
   -moz-font-feature-settings: 'liga';
   -moz-osx-font-smoothing: grayscale;
 }
-
