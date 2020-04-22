@@ -450,6 +450,23 @@
           "message": "a"
         }
       ]
+    },
+    {
+      "name": "hello",
+      "owner": "sirone",
+      "users": [
+        "sirone",
+        "admin"
+      ],
+      "messages": []
+    },
+    {
+      "name": "hello",
+      "owner": "sirone",
+      "users": [
+        "sirone"
+      ],
+      "messages": []
     }
   ],
   "clients": [

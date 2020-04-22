@@ -50,8 +50,10 @@ function chatBack(){
 
 function selectChat(name){
   chat = name
-  $('chat-right').style.display = "block"
-  $('chat-left').style.display = "none"
+  if(width<1000){
+    $('chat-right').style.display = "block"
+    $('chat-left').style.display = "none"
+  }
   socket.emit("get messages", name);
 }
 
