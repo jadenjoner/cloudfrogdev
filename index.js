@@ -379,7 +379,8 @@ io.on('connection', function(socket) {
       name: msg,
       owner: username,
       users: [username],
-      messages: []
+      messages: [],
+      time: new Date(),
     })
     db1.write();
     sendChatData(socket, username);
@@ -427,7 +428,7 @@ io.on('connection', function(socket) {
             break;
           }
   })
-  
+
   socket.on("chat del", (chat) => {
     for (var i in dbv.chat)
     if (dbv.chat[i].name == chat && dbv.chat[i].owner == username){
@@ -469,6 +470,7 @@ io.on('connection', function(socket) {
             dbv.chat[i].messages.push({
               user: username,
               date: date,
+              time: now,
               message: msg.message
             });
             db1.write();
@@ -493,27 +495,57 @@ io.on('connection', function(socket) {
 
 function sendChatData(socket, username) {
   if (username) {
-    var toSend = [{
-      title: "The Test Group Chat",
-      msg: "(bob) Hello this is test",
-      date: "Apr 2",
-      admin: true
-    }];
     var toSend = []
-
     for (var i in dbv.chat) {
       for (var b in dbv.chat[i].users) {
         if (dbv.chat[i].users[b] == username) {
+          var date = ""
+          if(dbv.chat[i].messages.length)
+            date = dbv.chat[i].messages[dbv.chat[i].messages.length-1].date
+
+          var msg = ""
+          if(dbv.chat[i].messages.length){
+            msg = '('+dbv.chat[i].messages[dbv.chat[i].messages.length-1].user+') '+
+            dbv.chat[i].messages[dbv.chat[i].messages.length-1].message;
+            if(msg.length>30){
+              console.log("cut1")
+              msg=msg.substring(0, 27)
+              msg += "..."
+            }
+            if(dbv.chat[i].messages.length > 1){
+
+              var toWrite='('+dbv.chat[i].messages[dbv.chat[i].messages.length-2].user+') '+
+              dbv.chat[i].messages[dbv.chat[i].messages.length-2].message;
+
+              if(toWrite.length>30){
+                console.log("cut2");
+                toWrite=toWrite.substring(0, 27)
+                toWrite += "..."
+              }
+              msg = toWrite + '<br>' + msg
+            }
+          }
+
+          var time = dbv.chat[i].time
+          if(dbv.chat[i].messages.length)
+            time = dbv.chat[i].messages[dbv.chat[i].messages.length-1].time
+
           toSend[toSend.length] = {
             title: dbv.chat[i].name,
-            msg: "(user) Latest Message",
-            date: "Apr 3",
+            msg: msg,
+            date: date,
             admin: dbv.chat[i].owner == username,
             users: dbv.chat[i].users,
+            time: time,
           }
         }
       }
     }
+
+    toSend.sort(function(a,b){
+      return new Date(b.time) - new Date(a.time);
+    });
+
 
     socket.emit("chat list", toSend);
 
