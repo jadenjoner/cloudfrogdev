@@ -381,6 +381,7 @@ io.on('connection', function(socket) {
       users: [username],
       messages: [],
       time: new Date(),
+      new: []
     })
     db1.write();
     sendChatData(socket, username);
@@ -450,6 +451,17 @@ io.on('connection', function(socket) {
           }
           socket.emit("messages", toSend)
 
+          // remove notify for chat
+
+          for(var c in dbv.chat[i].new){
+            if(dbv.chat[i].new[c] == username){
+              dbv.chat[i].new.splice(c, 1)
+              db1.write();
+              console.log("removed notify")
+              break;
+            }
+          }
+
           break;
         }
         break;
@@ -462,9 +474,17 @@ io.on('connection', function(socket) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     for (var i in dbv.chat)
-    if (dbv.chat[i].name == msg.chat) {
+      if (dbv.chat[i].name == msg.chat) {
         for (var b in dbv.chat[i].users)
           if (dbv.chat[i].users[b] == username) {
+            // Set new list of the users
+            dbv.chat[i].new = []
+            for(var c in dbv.chat[i].users){
+              if(dbv.chat[i].users[c] != username){
+                dbv.chat[i].new.push(dbv.chat[i].users[c])
+              }
+            }
+
             now = new Date()
             date = monthNames[now.getMonth()] + " " + now.getDate()
             dbv.chat[i].messages.push({
@@ -530,6 +550,15 @@ function sendChatData(socket, username) {
           if(dbv.chat[i].messages.length)
             time = dbv.chat[i].messages[dbv.chat[i].messages.length-1].time
 
+          // Detect if chat is New
+          var isNew = false
+          for(var c in dbv.chat[i].new){
+            if(dbv.chat[i].new[c] == username){
+              isNew = true
+              break;
+            }
+          }
+
           toSend[toSend.length] = {
             title: dbv.chat[i].name,
             msg: msg,
@@ -537,6 +566,7 @@ function sendChatData(socket, username) {
             admin: dbv.chat[i].owner == username,
             users: dbv.chat[i].users,
             time: time,
+            isNew: isNew,
           }
         }
       }

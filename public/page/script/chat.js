@@ -23,12 +23,16 @@ socket.on("chat list", (msg) => {
     else{
       shareText = '<div class="mb-share red" onclick="chatExit(\''+msg[i].title+'\')"><i>exit_to_app</i></div>'
     }
+    var notify = ''
+    if(msg[i].isNew){
+      notify = '<div class="mb-notify '+msg[i].title+'"></div>'
+    }
     toWrite += ' \
     <div class="message-box" onclick="selectChat(\''+msg[i].title+'\')"> \
       <div> \
         <h4>'+msg[i].title+'</h4> \
         '+shareText+'\
-        <div class="mb-date">'+msg[i].date+'</div> \
+        <div class="mb-date">'+msg[i].date+'</div>' + notify +' \
       </div> \
       <div class="mb-bottom"> \
         ' + msg[i].msg + ' \
@@ -49,6 +53,8 @@ function chatBack(){
 }
 
 function selectChat(name){
+  if($('mb-notify '+name)[0] != undefined)
+    $('mb-notify '+name)[0].style.display = "none"
   chat = name
   if(width<1000){
     $('chat-right').style.display = "block"
