@@ -11,7 +11,7 @@
       </div>
     </div>
     <div id="chat-right">
-      <div id="chat-close" onclick="chatBack()"><i>close</i></div>
+      <div id="chat-close" onclick="chatBack()"><i>close</i></div><h3 id="chat-h3"></h3>
       <div id="chat-messages-outer">
         <div id="chat-messages"></div>
         <input id="message-input" type="text" placeholder="Message"></input>
@@ -34,11 +34,21 @@
 
 <style>
 
+  #chat-h3{
+    font-size: 40px;
+    margin-bottom: -40px;
+    z-index: 10;
+    position: relative;
+    background: #eeeeee99;
+  }
+
   #chat-close{
     margin-bottom: -45px;
     display: none;
     text-align:left;
     padding-left: 5px;
+    position: relative;
+    z-index: 11;
   }
 
   #chat-close i{

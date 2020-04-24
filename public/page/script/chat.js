@@ -53,6 +53,7 @@ function chatBack(){
 }
 
 function selectChat(name){
+  $('chat-h3').innerHTML = name
   if($('mb-notify '+name)[0] != undefined)
     $('mb-notify '+name)[0].style.display = "none"
   chat = name
