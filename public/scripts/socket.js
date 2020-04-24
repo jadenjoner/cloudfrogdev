@@ -15,10 +15,11 @@ socket.on('loginPopup', ()=> {
   openPopup('login-popup', 0.7);
 })
 
+var timeout1;
+var timeout2;
+
 function message(msg){
-  var timeout1;
-  var timeout2;
-  
+
   $('message').innerHTML = msg
   $('message').style.display = "block"
   $('message').style.opacity = "1"
