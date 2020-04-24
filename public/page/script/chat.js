@@ -79,7 +79,7 @@ function chatShare(name){
     if(chatData[i].title == name){
       for(var b in chatData[i].users){
         var deleteButton = "";
-        if(chatData[i].owner != chatData[i].users[b])deleteButton = '<div class="chat-popup-remove" onclick="chatDel(\''+i+'\', \''+b+'\')">X</div>'
+        if(chatData[i].owner != chatData[i].users[b])deleteButton = '<div class="chat-popup-remove" onclick="chatRemove(\''+i+'\', \''+b+'\')">X</div>'
         toWrite += '\
         <div class="chat-popup-item">\
           <div class="chat-popup-name">'+chatData[i].users[b]+'</div>\
