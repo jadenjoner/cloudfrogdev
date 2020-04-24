@@ -422,6 +422,12 @@ io.on('connection', function(socket) {
       if (dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
         for (var b in dbv.users)
           if (dbv.users[b].username == msg.user) {
+            for(var c in dbv.chat[i].users){
+              if(dbv.chat[i].users[c] == msg.user){
+                message("User is allready added", socket)
+                return;
+              }
+            }
             dbv.chat[i].users.push(msg.user)
             sendChatData(socket, username);
             db1.write();
