@@ -375,16 +375,24 @@ io.on('connection', function(socket) {
 
 
   socket.on("chat add", (msg) => {
-    dbv.chat.push({
-      name: msg,
-      owner: username,
-      users: [username],
-      messages: [],
-      time: new Date(),
-      new: []
-    })
-    db1.write();
-    sendChatData(socket, username);
+    if(username){
+      for(var i in dbv.chat){
+        if(dbv.chat[i].name == msg){
+          message("Chat allready exists", socket)
+          return;
+        }
+      }
+      dbv.chat.push({
+        name: msg,
+        owner: username,
+        users: [username],
+        messages: [],
+        time: new Date(),
+        new: []
+      })
+      db1.write();
+      sendChatData(socket, username);
+    }else loginPopup(socket)
   });
 
 
@@ -395,10 +403,15 @@ io.on('connection', function(socket) {
     for (var i in dbv.chat)
       if (dbv.chat[i].name == msg.chat && dbv.chat[i].owner == username)
         for (var b in dbv.chat[i].users)
-          if (dbv.chat[i].users[b] == msg.user) {
+          if (dbv.chat[i].users[b] == msg.user){
             dbv.chat[i].users.splice(b, 1)
+            if(msg.user == dbv.chat[i].owner){
+              console.log("Changed owner from "+dbv.chat[i].owner+" to "+dbv.chat[i].users[0])
+              dbv.chat[i].owner = dbv.chat[i].users[0]
+            }
             sendChatData(socket, username);
             db1.write();
+            break;
           }
   })
 
